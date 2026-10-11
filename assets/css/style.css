@@ -1,0 +1,684 @@
+/* =========================================================
+   PREVIO  — style.css
+   1rem = 10px @ 1440px (PC) / 375px (SP)  ※ Human Eyes の view-ratio 方式
+   ========================================================= */
+:root {
+  --color-blue-900: #0E1F4D;
+  --color-blue-700: #2546D8;
+  --color-blue-600: #1B36B0;
+  --color-mist: #F3F6FA;
+  --color-white: #FFFFFF;
+  --color-line: #DCE3EC;
+  --text-primary: #1A2233;
+  --text-secondary: #5B6577;
+  --text-inverse: #F3F6FA;
+  --text-inverse-sub: #AEBBD6;
+  --color-mint: #14805F;
+  --color-mint-light: #8FE3C8;
+  --dummy: #D5D9DF;
+  --ease-expo: cubic-bezier(.19, 1, .22, 1);
+  --ease-ana: cubic-bezier(.22, 1, .36, 1);
+}
+
+html { font-size: calc(var(--view-ratio, 1) * 62.5%); line-height: 1; }
+body {
+  font-family: "Noto Sans JP", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  color: var(--text-primary);
+  background: var(--color-mist);
+  font-feature-settings: "palt";
+  overflow-x: clip;
+}
+.font-en { font-family: "Outfit", sans-serif; }
+.hl { color: var(--color-blue-700); }
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---------- dummy image ---------- */
+.dummy {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--dummy);
+  color: #7A828E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: .04em;
+  text-align: center;
+  line-height: 1.5;
+  overflow: hidden;
+}
+.dummy--il { background: #C9CED6; }
+
+/* ---------- section label (Human Eyes .section_title) ---------- */
+.c-label {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  padding-top: 0;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--color-line);
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: .026rem;
+  line-height: 1.4;
+  color: var(--color-mint);
+}
+.c-label::before {
+  content: "";
+  display: block;
+  width: .4rem;
+  height: .4rem;
+  border-radius: 10rem;
+  background: currentColor;
+}
+.c-label--inverse { color: var(--color-mint-light); border-color: rgba(174, 187, 214, .35); }
+.c-label--plain { border-bottom: 0; padding-bottom: 0; }
+
+/* ---------- circle button (Human Eyes .mod_circle_button) ---------- */
+.c-circle {
+  --s: 4.8rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--s);
+  height: var(--s);
+  flex-shrink: 0;
+}
+.c-circle__bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-blue-700);
+  transition: scale .3s var(--ease-expo);
+}
+.c-circle--blue .c-circle__bg { background: var(--color-blue-600); }
+.c-circle--dark .c-circle__bg { background: var(--color-blue-900); }
+.c-circle__icon {
+  position: relative;
+  width: 42%;
+  color: #fff;
+  display: block;
+}
+.c-circle__icon svg { width: 100%; height: auto; display: block; }
+.js-hover:hover .c-circle__bg { scale: 1.15; transition-duration: .6s; }
+.c-circle--s { --s: 4.8rem; }
+.c-circle--snew { --s: 4.8rem; }
+.c-circle--m { --s: 6rem; }
+.c-circle--xl { --s: 7.4rem; }
+@media (min-width: 800px) {
+  .c-circle--s { --s: 5.6rem; }
+  .c-circle--snew { --s: 6.4rem; }
+  .c-circle--m { --s: 9.6rem; }
+  .c-circle--xl { --s: 15.2rem; }
+}
+
+/* ---------- ANA pill button ---------- */
+.c-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: .6rem;
+  border-radius: 99px;
+  background: linear-gradient(270deg, var(--color-blue-700), var(--color-blue-600));
+  color: #fff;
+  isolation: isolate;
+}
+.c-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--color-blue-600);
+  opacity: 0;
+  transition: opacity .5s ease, scale .5s ease;
+}
+@media (min-width: 768px) {
+  .c-pill:hover::after { opacity: 1; scale: 1.08; }
+}
+
+/* =========================================================
+   Opening (Human Eyes)
+   ========================================================= */
+.opening { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.opening canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.opening__logo {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.opening__svg { display: block; width: 24rem; height: auto; overflow: hidden; }
+@media (min-width: 800px) { .opening__svg { width: 36rem; } }
+.is-opened .opening { display: none; }
+/* JS の準備が終わるまでのチラつき防止 */
+.is-opening .opening { background: var(--color-blue-700); }
+.opening__svg { visibility: hidden; }
+.is-loading .hero__content,
+.is-opening .in-header { visibility: hidden; }
+
+/* =========================================================
+   Header (Human Eyes)
+   ========================================================= */
+.in-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  padding: 3.2rem 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+@media (min-width: 800px) { .in-header { padding: 5.8rem 5.6rem 6.6rem; } }
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 60;
+  background: #fff;
+  border-bottom: 1px solid var(--color-line);
+  padding: 1.4rem 2rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform .4s var(--ease-expo), opacity .3s var(--ease-expo);
+}
+@media (min-width: 800px) { .fixed-header { padding: 1.9rem 3.2rem 1.4rem 3rem; } }
+html.show-fixed-header .fixed-header { transform: translateY(0); opacity: 1; transition-duration: .6s, .4s; }
+
+/* =========================================================
+   KV (Human Eyes .hero_section)
+   ========================================================= */
+.hero { position: relative; height: 100svh; clip-path: inset(0); z-index: 1; }
+.hero__bg { position: fixed; inset: 0; height: 100svh; z-index: 0; }
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--bg-black, .08));
+}
+.hero__content,
+.about-fixed__content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 33.65rem;
+  top: calc(100svh - 14rem);
+  z-index: 3;
+}
+.about-fixed__content { position: absolute; }
+@media (min-width: 800px) {
+  .hero__content, .about-fixed__content { width: 139.2rem; top: calc(100svh - 20.2rem); }
+}
+.kv-catch {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: .04em;
+  color: #fff;
+}
+@media (min-width: 800px) { .kv-catch { font-size: 2.6rem; } }
+.kv-en {
+  padding-top: 1.2rem;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  line-height: .86;
+  letter-spacing: -.02em;
+  color: #fff;
+  white-space: nowrap;
+}
+@media (min-width: 800px) { .kv-en { padding-top: 2rem; } }
+.kv-en__row { display: block; width: max-content; }
+.kv-en--fade { color: var(--color-white); }
+.about-fixed__content .kv-catch { visibility: hidden; }
+
+/* =========================================================
+   About (Human Eyes .index_about_area)
+   ========================================================= */
+.about { position: relative; clip-path: inset(0); background: var(--color-mist); }
+.about-fixed {
+  position: absolute;
+  left: 0;
+  top: -100svh;
+  width: 100%;
+  height: calc(10rem + 100svh);
+  pointer-events: none;
+}
+@media (min-width: 800px) { .about-fixed { height: calc(18.2rem + 100svh); } }
+.about-fixed__sticky { position: sticky; top: 0; height: 100svh; }
+
+/* marquee */
+.marquee { overflow-x: clip; overflow-y: visible; display: block; }
+.marquee__track { display: flex; width: max-content; will-change: transform; }
+.marquee__set { display: flex; align-items: center; flex-shrink: 0; padding-left: 1.6rem; }
+@media (min-width: 800px) { .marquee__set { padding-left: 3.4rem; } }
+.marquee__text {
+  font-weight: 900;
+  font-size: 4.4rem;
+  line-height: 1.2;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+@media (min-width: 800px) { .marquee__text { font-size: 11rem; } }
+.marquee .c-circle { margin-left: 1.2rem; }
+@media (min-width: 800px) { .marquee .c-circle { margin-left: 2.4rem; } }
+
+/* =========================================================
+   Why PREVIO (Human Eyes service accordion)
+   ========================================================= */
+.why-list { position: relative; border-radius: 3.2rem; overflow: clip; }
+.why-item {
+  position: relative;
+  border-radius: 3.2rem 3.2rem 0 0;
+  margin-bottom: -4rem;
+  background: var(--color-white);
+  box-shadow: 0 -1px 0 var(--color-line);
+  color: var(--color-blue-700);
+  transition: transform 1s var(--ease-expo), background-color .15s, color .15s;
+  will-change: transform;
+}
+.why-item:last-child { margin-bottom: 0; }
+.why-item.is-active { background: var(--color-blue-700); color: #fff; box-shadow: none; }
+.why-item__head {
+  display: flex;
+  align-items: center;
+  column-gap: 1.6rem;
+  height: 8.4rem;
+  padding: 2rem 0 1.6rem 2rem;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1.4;
+}
+@media (min-width: 800px) {
+  .why-item__head { height: 12rem; padding: 3rem 0 2.4rem 8rem; column-gap: 2rem; font-size: 2.2rem; }
+}
+.why-item__icon { width: 4.4rem; height: 4.4rem; flex-shrink: 0; }
+@media (min-width: 800px) { .why-item__icon { width: 5.8rem; height: 5.8rem; } }
+.why-item__icon { color: var(--color-mint); }
+.why-item.is-active .why-item__icon { color: var(--color-mint-light); }
+.why-item__num { font-family: "Outfit", sans-serif; font-weight: 600; color: var(--color-mint); }
+.why-item.is-active .why-item__num { color: var(--color-mint-light); }
+.why-item__body { opacity: 0; transition: opacity .4s ease; }
+.why-item.is-active .why-item__body { opacity: 1; transition-delay: .15s; }
+
+/* =========================================================
+   Problem (Human Eyes SMILE the NEXT)
+   ========================================================= */
+.problem { position: relative; z-index: 1; background: var(--color-blue-700); clip-path: inset(0); padding-bottom: 6rem; }
+@media (min-width: 800px) { .problem { padding-bottom: 12.8rem; } }
+.problem__photos { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; z-index: -1; }
+.problem__photos-inner { position: sticky; top: 0; width: 100%; height: 100vh; overflow-x: clip; }
+.problem__photo { position: absolute; will-change: transform; }
+.problem__photo img { border-radius: 1.2rem; }
+@media (min-width: 800px) { .problem__photo img { border-radius: 2.4rem; } }
+.problem__message { position: relative; height: var(--height, 200vh); padding-bottom: 40rem; }
+@media (min-width: 800px) { .problem__message { padding-bottom: 102rem; } }
+.problem__sticky { position: sticky; top: var(--top, 0%); }
+
+/* How it works cards (Human Eyes member's voice) */
+.cards { position: relative; z-index: 2; height: var(--height, 100vh); }
+.cards__sticky { position: sticky; top: var(--top, 0%); left: 0; }
+.cards__wrapper { overflow-x: clip; padding-left: 2rem; padding-right: 2rem; }
+@media (min-width: 800px) { .cards__wrapper { padding-left: 100rem; padding-right: 8rem; } }
+.cards__list { display: flex; width: max-content; }
+@media (min-width: 800px) {
+  .cards__list { transform: translate(calc((-100% + 32rem) * var(--ratio, 0))); }
+}
+@media (max-width: 799px) {
+  .cards { height: auto; }
+  .cards__wrapper { overflow-x: auto; scrollbar-width: none; }
+  .cards__wrapper::-webkit-scrollbar { display: none; }
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 30rem;
+  margin-right: 1.6rem;
+  padding-bottom: 2rem;
+  border: 1px solid #fff;
+  border-radius: 2rem;
+  color: #fff;
+}
+@media (min-width: 800px) { .card { width: 48rem; margin-right: 2.4rem; padding-bottom: 2.4rem; border-radius: 3.2rem; } }
+.card:last-child { margin-right: 0; }
+.card__number {
+  margin-top: -1px;
+  padding: .6rem 2rem .7rem;
+  border: 1px solid #fff;
+  border-top: 0;
+  border-radius: 0 0 1.2rem 1.2rem;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: .04em;
+  line-height: 1;
+}
+@media (min-width: 800px) { .card__number { font-size: 1.2rem; } }
+.card__title {
+  position: relative;
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 2.4rem;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.8rem;
+  letter-spacing: .04rem;
+  line-height: 1;
+}
+@media (min-width: 800px) { .card__title { font-size: 2.4rem; padding-top: 2.4rem; padding-bottom: 3.4rem; } }
+.card__title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -.6rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  background: var(--color-blue-700);
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  transform: translateX(-50%) rotate(45deg);
+}
+.card__il { width: 100%; padding: 2.4rem 3.2rem; }
+@media (min-width: 800px) { .card__il { padding: 3.2rem 6.4rem; } }
+.card__il .dummy { aspect-ratio: 4 / 3; height: auto; border-radius: 1.2rem; }
+.card__text {
+  position: relative;
+  width: 100%;
+  padding: 2.4rem 2rem 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-align: justify;
+}
+@media (min-width: 800px) { .card__text { padding: 3.2rem 4rem 0; font-size: 1.4rem; } }
+.card__text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-image: linear-gradient(to right, #fff 1px, transparent 2px);
+  background-size: 4px 1px;
+  background-repeat: repeat-x;
+}
+
+/* =========================================================
+   Concept movie (ANA career / environment card)
+   ========================================================= */
+.mcard { position: relative; display: flex; align-items: flex-end; height: 44rem; padding-left: 1.6rem; padding-right: 1.6rem; padding-bottom: 1.6rem; }
+/* ANA の偶数カード：白ボックスを右寄せ、背後の枠は左下にはみ出す */
+@media (min-width: 800px) { .mcard { align-items: center; justify-content: flex-end; height: 52rem; padding-left: 0; padding-right: 5.6rem; padding-bottom: 0; } }
+.mcard__thumb { position: absolute; inset: 0; }
+.mcard__thumb::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + 1.6rem);
+  height: calc(100% + 1.6rem);
+  border-radius: 1.6rem;
+  background: linear-gradient(180deg, var(--color-blue-700) 15%, var(--color-white));
+  transform: scaleY(-1);
+}
+@media (min-width: 800px) {
+  .mcard__thumb::before { left: auto; right: 0; width: calc(100% + 3.2rem); height: calc(100% + 3.2rem); border-radius: 3.2rem; }
+}
+.mcard__media { position: absolute; inset: 0; border-radius: 1.6rem; overflow: hidden; background: var(--dummy); }
+@media (min-width: 800px) { .mcard__media { border-radius: 3.2rem; } }
+.mcard__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+.mcard.is-playing .mcard__media video { opacity: 1; }
+.mcard__media img { object-position: 20% 50%; }
+@media (min-width: 800px) { .mcard__media img { object-position: 50% 50%; } }
+.mcard__box {
+  position: relative;
+  max-width: 47.2rem;
+  padding-top: 3.2rem;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  padding-bottom: 3.2rem;
+  border-radius: 1.6rem;
+  background: #fff;
+  transition: opacity .5s ease, visibility .5s;
+}
+@media (min-width: 800px) { .mcard__box { padding: 5.6rem; } }
+.mcard.is-playing .mcard__box,
+.mcard.is-playing .mcard__play { opacity: 0; visibility: hidden; }
+.mcard__play {
+  position: absolute;
+  top: 20%;
+  left: 80%;
+  translate: -50% -50%;
+  transition: opacity .5s ease, visibility .5s;
+}
+@media (min-width: 800px) { .mcard__play { top: 50%; left: 47%; } }
+
+/* =========================================================
+   Trust (ANA our business)
+   ========================================================= */
+.t-screen {
+  position: relative;
+  width: 36rem;
+  height: 26.6rem;
+  padding: 1.2rem 1.2rem 1.2rem 0;
+  border-radius: 0 2rem 2rem 0;
+  background: linear-gradient(180deg, var(--color-blue-700) 15%, var(--color-mist));
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .4);
+}
+@media (min-width: 800px) {
+  .t-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 56rem;
+    padding: 3.2rem 3.2rem 0 0;
+    border-radius: 0 3.2rem 3.2rem 0;
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .4);
+  }
+}
+.t-screen__inner { position: relative; width: 100%; height: 100%; border-radius: 0 1.6rem 1.6rem 0; overflow: hidden; }
+@media (min-width: 800px) { .t-screen__inner { border-radius: 0 3.6rem 3.6rem 0; } }
+.t-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; }
+.t-slide.is-active { opacity: 1; }
+.t-list { border-top: 1px solid var(--color-line); }
+.t-list li { position: relative; border-bottom: 1px solid var(--color-line); transition: opacity .5s ease; }
+.t-list li::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: var(--color-mint);
+  transition: width .5s ease;
+}
+@media (min-width: 800px) {
+  .t-list:hover li { opacity: .3; }
+  .t-list:hover li.is-active { opacity: 1; }
+  .t-list li.is-active::after { width: 100%; left: 0; right: auto; }
+}
+
+/* =========================================================
+   Voices (ANA our team)
+   ========================================================= */
+.voices { position: relative; color: #fff; isolation: isolate; overflow-x: clip; }
+.voices::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(37, 70, 216, 0), var(--color-blue-700) 25%, var(--color-blue-900) 78% 96%);
+}
+.v-slider { position: relative; width: 100%; margin-top: 4rem; overflow: visible; }
+@media (min-width: 800px) { .v-slider { width: 144rem; margin: -22.8rem auto 0; rotate: -25deg; } }
+.v-slider .swiper-wrapper { transition-timing-function: cubic-bezier(.68, -.6, .32, 1.6); }
+.v-slide { padding: 2rem 5rem; opacity: 0; transition: opacity .5s; }
+@media (min-width: 800px) { .v-slide { rotate: 25deg; padding: 3.2rem; } }
+.v-slide.swiper-slide-active,
+.v-slide.swiper-slide-prev,
+.v-slide.swiper-slide-next { opacity: 1; }
+.v-card { position: relative; }
+.v-ring {
+  position: absolute;
+  inset: -2rem;
+  border-radius: 30rem;
+  background: linear-gradient(rgba(14, 31, 77, 0), rgba(37, 70, 216, .5));
+}
+@media (min-width: 800px) { .v-ring { inset: -3.2rem; } }
+.v-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .1);
+  background: linear-gradient(to top, rgba(255, 255, 255, .3) 30%, var(--color-mint-light));
+  scale: .8;
+  opacity: 0;
+  transition: scale 1s var(--ease-ana), opacity 1s var(--ease-ana);
+}
+.v-slide.swiper-slide-active .v-ring::before { scale: 1; opacity: 1; transition-delay: 1.5s; }
+.v-photo { position: relative; height: 40rem; border-radius: 30rem; overflow: hidden; }
+@media (min-width: 800px) { .v-photo { height: 55.6rem; } }
+.v-photo img { transition: scale 1s var(--ease-ana); }
+.v-card:hover .v-photo img { scale: 1.1; }
+/* スライダー直下に1つだけ配置（ANA _badge 準拠：PCはスライダー幅1440基準） */
+.v-badge {
+  position: absolute;
+  top: -1.25rem;
+  left: 50%;
+  translate: -50% 0;
+  width: 36rem;
+  opacity: .3;
+  pointer-events: none;
+}
+@media (min-width: 800px) {
+  .v-badge { top: -1.1rem; left: 32.5%; translate: 0 0; width: 50rem; rotate: 25deg; }
+}
+.v-badge svg { display: block; width: 100%; height: auto; overflow: visible; }
+.v-badge text { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 43px; letter-spacing: .06em; fill: #fff; }
+.v-cat {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  padding: 1.2rem 2rem;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--color-blue-900), var(--color-blue-600));
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: rotate 1s var(--ease-ana);
+}
+@media (min-width: 800px) { .v-cat { padding: 1.4rem 2.5rem; font-size: 1.5rem; } }
+.v-prof {
+  position: absolute;
+  right: -1rem;
+  bottom: -1rem;
+  width: 19rem;
+  border: 1px solid var(--color-blue-700);
+  border-radius: .8rem;
+  background: #fff;
+  text-align: center;
+  color: var(--color-blue-700);
+  transition: rotate 1s var(--ease-ana);
+}
+.v-card:hover .v-cat { rotate: -8deg; }
+.v-card:hover .v-prof { rotate: 8deg; }
+.v-pager__bar { position: relative; width: 4rem; height: .2rem; border-radius: 2px; background: #fff; overflow: hidden; }
+.v-pager__bar span {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, var(--color-mint-light), var(--color-blue-700));
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.v-pager__bar.is-run span { animation: vbar 5s linear forwards; }
+.v-pager.is-paused .v-pager__bar span { animation-play-state: paused; }
+@keyframes vbar { to { transform: scaleX(1); } }
+.v-quote { transition: opacity .5s ease, filter .5s ease, translate .5s ease; }
+.v-quote.is-out { opacity: 0; filter: blur(10px); translate: 0 20px; }
+.v-more {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 14rem;
+  height: 14rem;
+  padding-bottom: 2.4rem;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  text-align: center;
+}
+@media (min-width: 800px) {
+  .v-more { position: absolute; right: calc(50% - 60rem); bottom: 19rem; width: 18rem; height: 18rem; font-size: 1.7rem; }
+}
+.v-more__icon { position: absolute; top: 70%; left: 50%; translate: -50% -50%; width: 2.4rem; transition: opacity .5s ease, translate .5s ease; }
+
+/* =========================================================
+   CTA + Footer (Human Eyes recommend_menu / footer)
+   ========================================================= */
+.footer { position: relative; background: var(--color-blue-900); color: #fff; }
+.footer__giant-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.footer-cta {
+  position: absolute;
+  top: -12rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 33.5rem;
+  height: 24rem;
+  border-radius: 2rem;
+  background: var(--color-blue-700);
+  z-index: 2;
+}
+@media (min-width: 800px) { .footer-cta { top: -18rem; width: 128rem; height: 36rem; border-radius: 3.2rem; } }
+.footer__giant { position: absolute; left: 0; bottom: -1rem; display: flex; width: max-content; pointer-events: none; }
+.footer__giant span {
+  display: block;
+  padding-right: 6rem;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 8rem;
+  line-height: .8;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+  color: var(--color-blue-700);
+  opacity: .4;
+}
+@media (min-width: 800px) { .footer__giant span { font-size: 23rem; } }
+
+/* =========================================================
+   Reveal (ANA scroll-reveal) / heading split (Human Eyes)
+   ========================================================= */
+.js-reveal > * { opacity: 0; }
+.no-js .js-reveal > * { opacity: 1; }
+.c-ch { display: inline-block; will-change: transform; }

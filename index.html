@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PREVIO | AI転職エージェント</title>
+  <meta name="description" content="AI転職エージェントが、市場を調査し、あなたに合う求人を、お届けします。">
+  <script>
+    // Human Eyes の view-ratio：PC 1440px / SP 375px 基準で 1rem = 10px
+    (function () {
+      var d = document.documentElement;
+      function set() {
+        var w = d.clientWidth;
+        d.style.setProperty('--view-ratio', w >= 800 ? w / 1440 : w / 375);
+      }
+      set();
+      window.addEventListener('resize', set);
+      d.classList.remove('no-js');
+      // オープニングを見たか（同じセッションで2回目以降はスキップ）
+      var opened = false;
+      try { opened = !!sessionStorage.getItem('previo-opened'); } catch (e) {}
+      d.classList.add(opened ? 'is-opened' : 'is-opening', 'is-loading');
+      // JS が読み込めなかった場合の保険
+      setTimeout(function () { d.classList.remove('is-loading', 'is-opening'); }, 5000);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&family=Outfit:wght@500..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        screens: { pc: '800px' },
+        extend: {
+          colors: {
+            'blue-900': '#0E1F4D',
+            'blue-700': '#2546D8',
+            'blue-600': '#1B36B0',
+            mist: '#F3F6FA',
+            line: '#DCE3EC',
+            'text-primary': '#1A2233',
+            'text-secondary': '#5B6577',
+            'text-inverse': '#F3F6FA',
+            'text-inverse-sub': '#AEBBD6',
+            mint: '#14805F',
+            'mint-light': '#8FE3C8',
+          },
+          fontFamily: {
+            jp: ['"Noto Sans JP"', 'sans-serif'],
+            en: ['Outfit', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- 共通アイコン -->
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 12"><path d="M0 6h22M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="i-arrow-s" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 18c.8-2.2 2.4-3.3 4.5-3.3s3.7 1.1 4.5 3.3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-why-01" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M27.6 5H16a4 4 0 0 0-4 4v30a4 4 0 0 0 4 4h13a4 4 0 0 0 4-4V16.5"/><path d="M20 38h5"/><path d="M24.5 15l-6 10.5h5L21.5 34l7.5-12h-5.5l2-7z"/></g><circle cx="34" cy="9" r="4.5" fill="currentColor"/></symbol>
+    <symbol id="i-why-02" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8h24a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H22l-8 7v-7h-2a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z"/><path d="M16.5 21l5 5 10-10"/></g></symbol>
+    <symbol id="i-why-03" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 43H11a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h15l9 9v5"/><path d="M26 5v9h9"/><path d="M14 22h10M14 28h6"/><rect x="26" y="30" width="16" height="12" rx="2.5"/><path d="M29 30v-3.5a5 5 0 0 1 10 0V30M34 35v2.5"/></g></symbol>
+  </svg>
+
+  <!-- ===================== 追従ヘッダー（Human Eyes .fixed_header） ===================== -->
+  <header class="fixed-header" id="fixedHeader">
+    <a href="./" class="block"><img src="assets/images/logo/logo-previo-blue.svg" alt="PREVIO" class="block h-[1.8rem] pc:h-[2.1rem] w-auto" width="3808" height="730"></a>
+    <a href="https://previo.jp/login" class="c-pill h-[3.6rem] w-[11rem] pc:h-[4rem] pc:w-[13rem] text-[1.3rem] pc:text-[1.4rem] font-bold">
+      <svg class="w-[2rem] h-[2rem] pc:w-[2.4rem] pc:h-[2.4rem]"><use href="#i-user"/></svg>ログイン
+    </a>
+  </header>
+
+  <main>
+    <!-- ===================== KV（Human Eyes hero） ===================== -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" id="heroBg">
+        <img src="assets/images/kv-bg.webp" alt="" class="w-full h-full object-cover">
+      </div>
+
+      <!-- オープニング -->
+      <div class="opening" id="opening" aria-hidden="true">
+        <canvas id="openingCanvas"></canvas>
+        <div class="opening__logo text-white" id="openingLogo">
+          <svg class="opening__svg" viewBox="68 -718 3808 730" fill="currentColor" aria-hidden="true"><path d="M188 -257V-379H340Q369.27456647398844 -379.0 392.8887283236994 -390.9015151515151Q416.5028901734104 -402.8030303030303 430.5014450867052 -425.7833333333333Q444.5 -448.76363636363635 444.5 -481.5Q444.5 -514.2363636363636 430.5014450867052 -537.2166666666667Q416.5028901734104 -560.1969696969697 392.8887283236994 -572.0984848484849Q369.27456647398844 -584.0 340 -584H188V-706H362.5Q430 -706 484.0 -678.75Q538.0 -651.5 569.5 -601.3475609756098Q601.0 -551.1951219512196 601.0 -481.5975609756098Q601.0 -412.5 569.5 -362.0Q538.0 -311.5 484.0 -284.25Q430 -257 362.5 -257.0ZM67.5 0.0V-706.0H225V0Z"/><path d="M856.0 -290.5V-407H1005.0Q1052.0 -407 1077.5 -430.75Q1103.0 -454.5 1103.0 -495.5Q1103.0 -534 1077.75 -559.0Q1052.5 -584.0 1005.5 -584.0H856.0V-706H1024.0Q1094.0 -706 1147.0 -679.25Q1200.0 -652.5 1229.75 -605.75Q1259.5 -559.0 1259.5 -498.0Q1259.5 -435.5 1229.5 -389.0Q1199.5 -342.5 1145.5 -316.5Q1091.5 -290.5 1019.0 -290.5ZM735.5 0.0V-706.0H893.0V0ZM1119.5 0.0 900.0 -304 1043.5 -343.0 1305.5 0.0Z"/><path d="M1427.5 0.0V-706.0H1585.0V0ZM1548.0 0V-135.5H1935.0V0ZM1548.0 -294.5V-426H1899.5V-294.5ZM1548.0 -570.5V-706H1929.5V-570.5Z"/><path d="M2302.5 0.0 2030.5 -706.0H2199.0L2406.0 -135H2337.0L2546.5 -706.0H2712.5L2437.5 0.0Z"/><path d="M2835.5 0.0V-706.0H2993.0V0Z"/><path d="M3505.5 12.0Q3426.0 12 3358.25 -16.0Q3290.5 -44.0 3239.75 -93.75Q3189.0 -143.5 3160.75 -210.25Q3132.5 -277.0 3132.5 -354.0Q3132.5 -431.5 3160.5 -497.5Q3188.5 -563.5 3238.75 -613.25Q3289.0 -663 3356.5 -690.5Q3424.0 -718 3503.5 -718.0Q3583.0 -718 3650.5 -690.5Q3718.0 -663 3768.5 -613.25Q3819.0 -563.5 3847.0 -497.0Q3875.0 -430.5 3875.0 -353Q3875.0 -276 3847.0 -209.5Q3819.0 -143 3768.75 -93.25Q3718.5 -43.5 3651.25 -15.75Q3584.0 12 3505.5 12.0ZM3503.5 -131.0Q3567.0 -131 3614.25 -159.0Q3661.5 -187.0 3687.75 -237.25Q3714.0 -287.5 3714.0 -354Q3714.0 -403.5 3699.0 -444.0Q3684.0 -484.5 3656.0 -514.0Q3628.0 -543.5 3589.5 -559.25Q3551.0 -575 3503.5 -575.0Q3440.5 -575.0 3393.25 -547.5Q3346.0 -520 3319.75 -470.25Q3293.5 -420.5 3293.5 -354.0Q3293.5 -304.0 3308.5 -262.75Q3323.5 -221.5 3351.25 -192.25Q3379.0 -163 3417.75 -147.0Q3456.5 -131.0 3503.5 -131.0Z"/></svg>
+        </div>
+      </div>
+
+      <!-- KV 内ヘッダー -->
+      <header class="in-header">
+        <a href="./" class="block"><img src="assets/images/logo/logo-previo-white.svg" alt="PREVIO" class="block h-[2.2rem] pc:h-[3rem] w-auto" width="3808" height="730"></a>
+        <a href="https://previo.jp/login" class="c-pill h-[3.6rem] w-[11rem] pc:h-[4rem] pc:w-[13rem] text-[1.3rem] pc:text-[1.4rem] font-bold">
+          <svg class="w-[2rem] h-[2rem] pc:w-[2.4rem] pc:h-[2.4rem]"><use href="#i-user"/></svg>ログイン
+        </a>
+      </header>
+
+      <div class="hero__content" id="heroContent">
+        <h1 class="kv-catch" id="kvCatch">年収アップの機会を、見逃さない</h1>
+        <p class="kv-en js-fit" aria-label="Preview your next chapter.">
+          <span class="kv-en__row">Preview your<span class="pc:hidden"><br></span><span class="hidden pc:inline"> </span>next chapter.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== イントロ（Human Eyes about） ===================== -->
+    <section class="about pb-[8rem] pc:pb-[14.5rem]">
+      <div class="about-fixed" aria-hidden="true">
+        <div class="about-fixed__sticky">
+          <div class="about-fixed__content">
+            <p class="kv-catch">年収アップの機会を、見逃さない</p>
+            <p class="kv-en kv-en--fade js-fit">
+              <span class="kv-en__row">Preview your<span class="pc:hidden"><br></span><span class="hidden pc:inline"> </span>next chapter.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative w-[33.5rem] pc:w-[128rem] mx-auto pt-[12rem] pc:pt-[17.5rem] pc:flex pc:justify-between">
+        <p class="c-label c-label--plain pc:self-start pc:pt-[1rem]">AI転職エージェント</p>
+        <p class="pt-[2.4rem] pc:pt-0 pc:w-[90.9rem] font-black text-[2.2rem] pc:text-[3.5rem] leading-[1.5] tracking-[.02em] text-justify js-reveal-text">
+          AI転職エージェントが、<span class="hl">市場を調査</span>し、<br class="hidden pc:inline"><span class="hl">あなたに合う求人</span>を、お届けします。
+        </p>
+      </div>
+
+      <a href="https://previo.jp/login" class="marquee js-marquee js-hover pt-[3.2rem] pc:pt-[4.4rem] pc:-ml-[5rem]" aria-label="無料で始める">
+        <div class="marquee__track">
+          <div class="marquee__set">
+            <span class="marquee__text">無料で始める</span>
+            <span class="c-circle c-circle--xl"><span class="c-circle__bg"></span><span class="c-circle__icon"><svg viewBox="0 0 24 12"><use href="#i-arrow"/></svg></span></span>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- ===================== Why PREVIO（Human Eyes service） ===================== -->
+    <section class="bg-mist pb-[8rem] pc:pb-[16rem]" id="why">
+      <div class="w-[35.5rem] pc:w-[136.4rem] mx-auto rounded-[2rem] pc:rounded-[3.2rem] bg-white pt-[2.4rem] pl-[2rem] pr-[2rem] pb-[6rem] pc:pt-[4.2rem] pc:pl-[4.4rem] pc:pr-[4.4rem] pc:pb-[10rem]">
+        <p class="c-label">Why PREVIO</p>
+        <h2 class="pt-[2.4rem] pc:pt-[3rem] font-black text-[2.2rem] pc:text-[3rem] leading-[1.4] tracking-[.06rem]"><span class="hl">PREVIO</span>にできること。</h2>
+      </div>
+
+      <ul class="why-list js-why w-[37.5rem] pc:w-[144rem] mx-auto -mt-[2.6rem]">
+        <li class="why-item is-active">
+          <div class="why-item__head">
+            <div class="why-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-01"/></svg></div>
+            <span class="why-item__num">01</span>
+            <h3>登録後すぐ、あなた専用のマッチ求人をお届け</h3>
+          </div>
+          <div class="why-item__body">
+            <div class="w-[33.5rem] pc:w-[128rem] mx-auto pb-[6.4rem] pc:pb-[7.2rem] pc:flex pc:gap-[4.8rem]">
+              <div class="w-full pc:w-[32.3rem] h-[20rem] pc:h-[20.9rem] shrink-0 rounded-[1.6rem] pc:rounded-[2.4rem] overflow-hidden"><img src="assets/images/why-01.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+              <p class="pt-[2rem] pc:pt-0 text-[1.4rem] leading-[1.75]">登録しておくだけで、あなたに合うポジションを見つけてお届けします。あなたが探す必要はありません。</p>
+            </div>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-item__head">
+            <div class="why-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-02"/></svg></div>
+            <span class="why-item__num">02</span>
+            <h3>「マッチする理由」を言語化</h3>
+          </div>
+          <div class="why-item__body">
+            <div class="w-[33.5rem] pc:w-[128rem] mx-auto pb-[6.4rem] pc:pb-[7.2rem] pc:flex pc:gap-[4.8rem]">
+              <div class="w-full pc:w-[32.3rem] h-[20rem] pc:h-[20.9rem] shrink-0 rounded-[1.6rem] pc:rounded-[2.4rem] overflow-hidden"><img src="assets/images/why-02.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+              <p class="pt-[2rem] pc:pt-0 text-[1.4rem] leading-[1.75]">「なぜこの求人があなたに合うのか」を、分かりやすく説明します。</p>
+            </div>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-item__head">
+            <div class="why-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-03"/></svg></div>
+            <span class="why-item__num">03</span>
+            <h3>非公開求人もカバー</h3>
+          </div>
+          <div class="why-item__body">
+            <div class="w-[33.5rem] pc:w-[128rem] mx-auto pb-[6.4rem] pc:pb-[7.2rem] pc:flex pc:gap-[4.8rem]">
+              <div class="w-full pc:w-[32.3rem] h-[20rem] pc:h-[20.9rem] shrink-0 rounded-[1.6rem] pc:rounded-[2.4rem] overflow-hidden"><img src="assets/images/why-03.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+              <p class="pt-[2rem] pc:pt-0 text-[1.4rem] leading-[1.75]">各業界・職種に強みを持つ人材紹介会社と提携。非公開求人を含む、質の高い求人の中からお届けします。</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== The Problem + How it works（Human Eyes recruit area） ===================== -->
+    <section class="problem" id="problem">
+      <div class="relative z-[2] pt-[6rem] pc:pt-[7.6rem] -mb-[20rem] pc:-mb-[52rem]">
+        <p class="c-label c-label--inverse w-[33.5rem] pc:w-[128rem] mx-auto">The Problem</p>
+
+        <div class="problem__message js-problem-message pt-[4rem] pc:pt-[10rem]">
+          <div class="problem__sticky js-problem-sticky w-[33.5rem] pc:w-[128rem] mx-auto">
+            <h2 class="js-heading text-center text-white font-black text-[2.8rem] pc:text-[8rem] leading-[1.3] tracking-[.02em]">いまのキャリア探し、<br>あなたに合っていますか？</h2>
+            <div class="pc:w-[76rem] mx-auto pt-[2.4rem] pc:pt-[5.6rem] text-white font-black text-[1.8rem] pc:text-[3.2rem] leading-[1.6] tracking-[.072rem] text-justify">
+              <p>転職サイトに登録すれば、大量のスカウトが届く。自分で調べれば、何百件もの求人に埋もれる。求人票を読んでも、よく分からない。</p>
+              <p class="pt-[1.6rem] pc:pt-[3.2rem]">PREVIOは、量ではなく精度で応えます。あなたの経験や志向性を深く理解し、最適な求人と、その理由を届ける。それが、AI転職エージェントという新しい選択肢です。</p>
+            </div>
+            <div class="pt-[3.2rem] pc:pt-[4.4rem] flex justify-center">
+              <a href="https://previo.jp/login" class="js-hover inline-flex items-center gap-[1.2rem] pc:gap-[2rem] text-white font-bold text-[1.6rem] pc:text-[2.4rem]">
+                無料で始める
+                <span class="c-circle c-circle--m c-circle--blue"><span class="c-circle__bg"></span><span class="c-circle__icon"><svg viewBox="0 0 24 12"><use href="#i-arrow"/></svg></span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem__photos" aria-hidden="true">
+        <div class="problem__photos-inner">
+          <div class="problem__photo js-photo w-[12rem] pc:w-[28.8rem] left-[22rem] pc:left-[104.8rem] top-[.8%] z-[2]" data-lerp=".85" data-offset=".08"><img src="assets/images/problem-01.webp" alt="" class="block w-full aspect-[4/3] object-cover" loading="lazy" decoding="async"></div>
+          <div class="problem__photo js-photo w-[8rem] pc:w-[14.4rem] left-[18rem] pc:left-[92.4rem] top-[45.2%]" data-lerp=".9" data-offset=".1"><img src="assets/images/problem-02.webp" alt="" class="block w-full aspect-square object-cover" loading="lazy" decoding="async"></div>
+          <div class="problem__photo js-photo w-[14rem] pc:w-[34rem] left-[23.5rem] pc:left-[114rem] top-[52.2%]" data-lerp=".8" data-offset=".12"><img src="assets/images/problem-03.webp" alt="" class="block w-full aspect-[4/3] object-cover" loading="lazy" decoding="async"></div>
+          <div class="problem__photo js-photo w-[13rem] pc:w-[31.2rem] left-[2rem] pc:left-[12rem] top-[5.6%] z-[2]" data-lerp=".85" data-offset="-.025"><img src="assets/images/problem-04.webp" alt="" class="block w-full aspect-[16/10] object-cover" loading="lazy" decoding="async"></div>
+          <div class="problem__photo js-photo w-[10rem] pc:w-[21.6rem] left-0 top-[32%]" data-lerp=".7" data-offset="-.025"><img src="assets/images/problem-05.webp" alt="" class="block w-full aspect-[2/3] object-cover object-[40%_50%] !rounded-l-none" loading="lazy" decoding="async"></div>
+          <div class="problem__photo js-photo w-[15rem] pc:w-[38rem] left-[6rem] pc:left-[31.6rem] top-[60%]" data-lerp=".8" data-offset=".12"><img src="assets/images/problem-06.webp" alt="" class="block w-full aspect-[16/10] object-cover" loading="lazy" decoding="async"></div>
+          <div class="problem__photo js-photo w-[12rem] pc:w-[28.8rem] left-[14rem] pc:left-[69.6rem] top-[-20.4%]" data-lerp=".85" data-offset="0"><img src="assets/images/problem-07.webp" alt="" class="block w-full aspect-[4/3] object-cover" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+
+      <div class="cards js-cards">
+        <div class="cards__sticky js-cards-sticky">
+          <div class="w-[33.5rem] pc:w-[128rem] mx-auto">
+            <p class="c-label c-label--inverse">How it works</p>
+            <h2 class="pt-[2.4rem] pc:pt-[3rem] text-white font-black text-[2.2rem] pc:text-[3rem] leading-[1.4] tracking-[.06rem]">PREVIOの使い方。</h2>
+          </div>
+          <div class="cards__wrapper pt-[3.2rem] pc:pt-[4.8rem]">
+            <ol class="cards__list js-cards-list">
+              <li class="card">
+                <p class="card__number">01</p>
+                <h3 class="card__title">あなたが登録する</h3>
+                <div class="card__il"><img src="assets/images/how-01.webp" alt="スマホから書類をアップロードし、AIが読み取るイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
+                <p class="card__text">ファイルをアップロードすれば、AIが経歴を自動で読み取ります。入力の手間は最小限です。</p>
+              </li>
+              <li class="card">
+                <p class="card__number">02</p>
+                <h3 class="card__title">PREVIOが届ける</h3>
+                <div class="card__il"><img src="assets/images/how-02.webp" alt="AIが求人カードを選んで届けるイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
+                <p class="card__text">あなた専用のマッチ求人を厳選。あなたに合う理由を、分かりやすくお伝えします。</p>
+              </li>
+              <li class="card">
+                <p class="card__number">03</p>
+                <h3 class="card__title">あなたが選ぶ</h3>
+                <div class="card__il"><img src="assets/images/how-03.webp" alt="並んだカードから1枚を選ぶ人のイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
+                <p class="card__text">求人を見て、本当に気になる求人をピックアップ。重視する条件が変われば、提案求人も変わります。</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Concept Movie（ANA career card） ===================== -->
+    <section class="bg-white pt-[6rem] pb-[6rem] pc:pt-[9.6rem] pc:pb-[8rem]">
+      <div class="w-[33.5rem] pc:w-[124rem] mx-auto">
+        <div class="mcard js-movie">
+          <div class="mcard__thumb">
+            <div class="mcard__media">
+              <img src="assets/images/movie-poster.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async">
+              <video src="https://previo.jp/videos/intro-20260902.mp4" preload="metadata" playsinline></video>
+            </div>
+          </div>
+          <div class="mcard__box js-reveal">
+            <p class="c-label c-label--plain">Concept Movie</p>
+            <h2 class="pt-[1.4rem] pc:pt-[2rem] font-bold text-[2.2rem] pc:text-[3rem] leading-[1.4] tracking-[.02em]">PREVIOのコンセプト。</h2>
+          </div>
+          <button type="button" class="mcard__play js-hover c-circle c-circle--m" aria-label="動画を再生">
+            <span class="c-circle__bg"></span><span class="c-circle__icon !w-[36%]"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Trust（ANA our business） ===================== -->
+    <section class="bg-mist pt-[7.6rem] pb-[7.6rem] pc:pt-[13.4rem] pc:pb-[13.4rem]">
+      <div class="js-reveal w-[33.5rem] pc:w-[110rem] mx-auto text-center grid gap-[1.4rem] pc:gap-[2.6rem] justify-items-center">
+        <p class="c-label c-label--plain">Trust</p>
+        <h2 class="font-bold text-[2.6rem] pc:text-[5rem] leading-[1.4] tracking-[.02em]">確かな<span class="hl">技術</span>。</h2>
+      </div>
+
+      <div class="relative pt-[4rem] pc:pt-[9rem]">
+        <div class="pc:relative pc:min-h-[56rem]">
+          <div class="t-screen">
+            <div class="t-screen__inner">
+              <div class="t-slide is-active" data-slide="0"><img src="assets/images/trust-01.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+              <div class="t-slide" data-slide="1"><img src="assets/images/trust-02.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <div class="w-[33.5rem] mx-auto pt-[3.2rem] pc:pt-0 pc:w-[129rem] pc:px-[2.5rem] pc:min-h-[56rem] pc:flex pc:items-center">
+            <ul class="t-list js-tlist js-reveal pc:w-[calc(50%-7.2rem)] pc:ml-auto">
+              <li data-index="0">
+                <div class="flex gap-[1.2rem] pc:gap-[2rem] pt-[1.6rem] pb-[1.6rem] pl-[1.2rem] pc:pt-[2.6rem] pc:pb-[2.6rem] pc:pl-[2.4rem]">
+                  <span class="font-en font-medium text-[1.2rem] pc:text-[1.4rem] leading-[1.85] pt-[.3rem] pc:pt-[.6rem] text-mint">01</span>
+                  <div>
+                    <h3 class="font-medium text-[1.5rem] pc:text-[2.2rem] leading-[1.85] tracking-[.04em]">特許技術を搭載</h3>
+                    <p class="pt-[.4rem] text-[1.3rem] pc:text-[1.5rem] leading-[1.85] tracking-[.04em] text-text-secondary font-normal">特許第7825249号・特許第7889816号 取得済み</p>
+                  </div>
+                </div>
+              </li>
+              <li data-index="1">
+                <div class="flex gap-[1.2rem] pc:gap-[2rem] pt-[1.6rem] pb-[1.6rem] pl-[1.2rem] pc:pt-[2.6rem] pc:pb-[2.6rem] pc:pl-[2.4rem]">
+                  <span class="font-en font-medium text-[1.2rem] pc:text-[1.4rem] leading-[1.85] pt-[.3rem] pc:pt-[.6rem] text-mint">02</span>
+                  <div>
+                    <h3 class="font-medium text-[1.5rem] pc:text-[2.2rem] leading-[1.85] tracking-[.04em]">完全中立なアルゴリズム</h3>
+                    <p class="pt-[.4rem] text-[1.3rem] pc:text-[1.5rem] leading-[1.85] tracking-[.04em] text-text-secondary font-normal">企業側の手数料等は一切排除。あなたの経歴や志向とのマッチングを追求</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Privacy（Human Eyes company profile） ===================== -->
+    <section class="bg-white pb-[8rem] pc:pb-[16rem]">
+      <div class="w-[33.5rem] pc:w-[128rem] mx-auto">
+        <p class="c-label pt-[6rem] pc:pt-[10.8rem]">Privacy</p>
+        <h2 class="js-heading pt-[3.2rem] pc:pt-[5.8rem] relative z-[1] font-black text-[2.8rem] pc:text-[6.6rem] leading-[1.3] tracking-[.02em] pc:-mb-[8rem]">
+          <span class="text-blue-700">あなたの情報は、<br class="pc:hidden">企業やエージェントには</span><br>公開されません。
+        </h2>
+        <div class="pc:flex pc:justify-between pt-[2.4rem] pc:pt-0">
+          <div class="pc:w-[37rem] pc:pt-[13rem] js-reveal">
+            <div class="pc:hidden w-full aspect-[16/10] rounded-[1.6rem] overflow-hidden"><img src="assets/images/privacy.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+            <p class="pt-[2.4rem] pc:pt-0 font-black text-[1.6rem] pc:text-[2rem] leading-[1.6] tracking-[.048rem]">自分の意志で応募するまで、登録情報は採用企業や人材紹介会社に開示されません。転職を考え始める前から、安心してご利用いただけます。</p>
+            <ul class="pt-[2.4rem] pc:pt-[3.2rem] grid gap-[1.2rem]">
+              <li class="flex items-center gap-[1rem] font-bold text-[1.4rem] pc:text-[1.6rem] leading-[1.5]"><svg class="w-[2rem] h-[2rem] text-mint shrink-0"><use href="#i-check"/></svg>応募するまで、情報は一切非開示</li>
+              <li class="flex items-center gap-[1rem] font-bold text-[1.4rem] pc:text-[1.6rem] leading-[1.5]"><svg class="w-[2rem] h-[2rem] text-mint shrink-0"><use href="#i-check"/></svg>完全無料</li>
+              <li class="flex items-center gap-[1rem] font-bold text-[1.4rem] pc:text-[1.6rem] leading-[1.5]"><svg class="w-[2rem] h-[2rem] text-mint shrink-0"><use href="#i-check"/></svg>いつでも退会可能</li>
+            </ul>
+          </div>
+          <div class="hidden pc:block w-[84rem] aspect-[84/52] rounded-[3.2rem] overflow-hidden"><img src="assets/images/privacy.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Voices（ANA our team） ===================== -->
+    <section class="voices bg-white pt-[8.2rem] pb-[9.6rem] pc:pt-[6.8rem] pc:pb-[21.2rem]" id="voices">
+      <div class="relative z-[2] w-[33.5rem] pc:w-[115rem] mx-auto">
+        <div class="js-reveal">
+          <p class="c-label c-label--inverse c-label--plain">Voices</p>
+          <h2 class="pt-[1.4rem] pc:pt-[2.6rem] font-bold text-[2.6rem] pc:text-[5rem] leading-[1.4] tracking-[.02em]">利用者の声</h2>
+        </div>
+        <div class="pc:w-[30rem] pt-[2rem] pc:pt-[3.2rem] min-h-[9rem] pc:min-h-[15rem]">
+          <p class="v-quote js-vquote font-bold text-[1.6rem] pc:text-[2rem] leading-[1.7] tracking-[.04em]">生成AIに聞いてたどり着いた、”精度が段違い”のAI転職サービス</p>
+          <p class="v-quote js-vname pt-[.8rem] text-[1.3rem] pc:text-[1.5rem] leading-[1.85] text-text-inverse-sub">Aさん（ITエンジニア）</p>
+        </div>
+        <div class="v-pager js-vpager flex items-center gap-[1rem] pt-[2.4rem] pc:pt-[3.2rem] font-en text-[1.2rem]">
+          <span class="js-vcur">01</span>
+          <span class="v-pager__bar js-vbar"><span></span></span>
+          <span>02</span>
+          <button type="button" class="js-vpause ml-[1rem] w-[4rem] h-[2.6rem] rounded-[99px] bg-blue-700 flex items-center justify-center gap-[.3rem]" aria-label="一時停止">
+            <i class="block w-[.2rem] h-[.9rem] bg-white"></i><i class="block w-[.2rem] h-[.9rem] bg-white"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="swiper v-slider js-vslider">
+        <div class="swiper-wrapper">
+          <!-- 2名分をループ用に複製 -->
+          <div class="swiper-slide v-slide" data-voice="0"></div>
+          <div class="swiper-slide v-slide" data-voice="1"></div>
+          <div class="swiper-slide v-slide" data-voice="0"></div>
+          <div class="swiper-slide v-slide" data-voice="1"></div>
+          <div class="swiper-slide v-slide" data-voice="0"></div>
+          <div class="swiper-slide v-slide" data-voice="1"></div>
+        </div>
+        <div class="v-badge" aria-hidden="true">
+          <svg viewBox="0 0 480 620">
+            <path id="vPath" d="M380,565 A240,240 0 0,1 240,620 A240,240 0 0,1 0,380 L0,240 A240,240 0 0,1 240,0 A240,240 0 0,1 480,240 L480,380 A240,240 0 0,1 380,565 Z" fill="none"/>
+            <!-- パス長(約1788)×2周分にtextLengthを固定し、1周分(-100%)ずらしてループ → 常にパス全周が文字で埋まる -->
+            <text><textPath href="#vPath" startOffset="0%" textLength="3576" lengthAdjust="spacing">Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices - Voices -&#160;<animate attributeName="startOffset" from="0%" to="-100%" dur="50s" repeatCount="indefinite"/></textPath></text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="w-[33.5rem] mx-auto pt-[4rem] flex justify-end pc:pt-0 pc:w-auto pc:block">
+        <a href="https://previo.jp/media/voices/" class="v-more c-pill">
+          インタビュー<br>記事一覧へ
+          <svg class="v-more__icon" viewBox="0 0 24 24"><use href="#i-arrow-s"/></svg>
+        </a>
+      </div>
+
+      <template id="vSlideTpl">
+        <a class="v-card block" href="#">
+          <div class="v-ring"></div>
+          <div class="v-photo"><img alt="" class="js-vphoto w-full h-full object-cover" loading="lazy" decoding="async"></div>
+          <p class="v-cat js-vcat"></p>
+          <div class="v-prof">
+            <p class="font-en font-bold text-[1.3rem] uppercase text-white bg-blue-700 rounded-t-[.6rem] p-[.5rem] js-vnum"></p>
+            <p class="pt-[1.2rem] pb-[1.6rem] font-medium text-[2rem] leading-[1.4] js-vname2"></p>
+            <p class="border-t border-dashed border-blue-700 pt-[1.6rem] pb-[1.6rem] flex justify-center"><svg class="w-[2.4rem] h-[2.4rem]"><use href="#i-arrow-s"/></svg></p>
+          </div>
+        </a>
+      </template>
+    </section>
+
+    <!-- CTA が重なる分の余白 -->
+    <div class="bg-mist h-[18rem] pc:h-[30rem]"></div>
+  </main>
+
+  <!-- ===================== CTA + Footer（Human Eyes） ===================== -->
+  <footer class="footer js-footer pt-[16rem] pb-[10rem] pc:pt-[24.4rem] pc:pb-[29rem]">
+    <a href="https://previo.jp/login" class="footer-cta js-hover flex flex-col items-center justify-center text-center">
+      <p class="font-extrabold text-[1.2rem] pc:text-[1.4rem] leading-[1.4]">自分に合う企業がすぐに分かる</p>
+      <p class="pt-[1.2rem] pc:pt-[1.6rem] font-en font-semibold text-[3.2rem] pc:text-[7.2rem] leading-[1] tracking-[-.01em]">Preview your next chapter.</p>
+      <p class="pt-[2rem] pc:pt-[3.2rem] inline-flex items-center gap-[1.2rem] pc:gap-[1.6rem] font-bold text-[1.4rem] pc:text-[1.6rem]">
+        無料で登録する
+        <span class="c-circle c-circle--snew c-circle--dark"><span class="c-circle__bg"></span><span class="c-circle__icon"><svg viewBox="0 0 24 12"><use href="#i-arrow"/></svg></span></span>
+      </p>
+    </a>
+
+    <div class="relative z-[1] w-[33.5rem] pc:w-[128rem] mx-auto pc:flex pc:justify-between">
+      <div>
+        <a href="./" class="block w-fit"><img src="assets/images/logo/logo-previo-white.svg" alt="PREVIO" class="block h-[2.4rem] pc:h-[3rem] w-auto" width="3808" height="730"></a>
+        <p class="pt-[1.6rem] font-en text-[1.2rem] leading-[1.75] text-text-inverse-sub">© 2026 OurStory Inc. All Rights Reserved.</p>
+      </div>
+      <ul class="pt-[3.2rem] pc:pt-0 flex gap-[3.2rem] pc:gap-[4.8rem]">
+        <li><a href="https://our-story.co.jp/" class="font-bold text-[1.4rem] pc:text-[1.6rem] hover:text-mint-light transition-colors">会社概要</a></li>
+        <li><a href="https://our-story.co.jp/privacy" class="font-bold text-[1.4rem] pc:text-[1.6rem] hover:text-mint-light transition-colors">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__giant-wrap" aria-hidden="true">
+      <div class="footer__giant js-giant">
+        <span>Preview your next chapter.</span><span>Preview your next chapter.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

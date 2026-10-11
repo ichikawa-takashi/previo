@@ -1,0 +1,368 @@
+<body class="wp-singular post-template-default single single-post postid-84 single-format-standard wp-embed-responsive wp-theme-twentytwentyfive wp-child-theme-previo-media" style="">
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5JHLBFCL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	
+<div class="wp-site-blocks"><div class="entry-content wp-block-post-content is-layout-flow wp-block-post-content-is-layout-flow">
+<!--
+PREVIO 広告LP（リスティング01）: WordPress「カスタムHTML」ブロック貼り付け用の body 断片　
+公開手順（Kudoさん要件準拠）:
+1. WPメディアに以下4ファイルをアップロード（assetsフォルダのZIPを別途お渡ししています）
+   - app-match-phone.png（FVの推薦理由画面）
+   - app-axes-shot.png（できること: 3つの軸画面）
+   - app-recommend-shot.png（できること: おすすめ求人一覧画面）　
+   - concept-movie.mp4（コンセプトムービー）
+2. このファイル内の {{APP_MATCH_PHONE_URL}} {{APP_AXES_URL}} {{APP_RECOMMEND_URL}} {{CONCEPT_MOVIE_URL}} の4箇所を、アップロード後のメディアURLに置換
+3. 投稿→カスタムHTMLブロックに全文貼り付け、カテゴリー「lp」のみチェック、スラッグは英語で公開
+※ このコメントブロックは貼り付け前に削除しても、残してもかまいません（表示されません）
+-->
+
+<div id="lp-root">
+<style>
+#lp-root{background:#fff;font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;-webkit-font-smoothing:antialiased;margin:0;line-height:1.5;color:#1F2937}
+#lp-root *,#lp-root *::before,#lp-root *::after{margin:0;padding:0;box-sizing:border-box}
+#lp-root .serif{font-family:Georgia,"Times New Roman",serif;font-weight:normal}
+#lp-root a{color:#003580;text-decoration:none}
+#lp-root a:hover{opacity:0.9}
+#lp-root .lp-header{position:fixed;top:0;left:0;right:0;z-index:100;background:transparent;transition:background 0.4s}
+#lp-root .lp-header.scrolled{background:#003580}
+#lp-root .lp-header-in{max-width:1100px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px}
+#lp-root .lp-logo{font-family:Georgia,serif;font-size:15px;color:#fff;letter-spacing:4px}
+#lp-root .lp-login{font-size:12px;font-weight:500;padding:9px 24px;border-radius:6px;color:#fff;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);letter-spacing:0.3px}
+#lp-root .lp-cta{display:inline-block;font-size:15px;font-weight:600;padding:16px 48px;border-radius:6px;background:#E8651A;color:#fff;box-shadow:0 4px 24px rgba(232,101,26,0.25);letter-spacing:0.5px}
+#lp-root .lp-sec{padding:96px 48px}
+#lp-root .lp-in{max-width:860px;margin:0 auto}
+#lp-root .lp-eyebrow{font-family:Georgia,serif;font-style:italic;font-size:12px;color:#4BA89A;letter-spacing:4px;margin-bottom:16px}
+#lp-root .lp-eyebrow.on-navy{color:#6BC4B4}
+#lp-root .lp-h2{font-family:Georgia,serif;font-weight:normal;font-size:28px;color:#003580;margin-bottom:56px;line-height:1.5}
+#lp-root .lp-reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+#lp-root .lp-reveal.vis{opacity:1;transform:translateY(0)}
+#lp-root .lp-hero{background:#003580;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:140px 48px 80px;position:relative;overflow:hidden;text-align:center}
+#lp-root .lp-hero-kicker{font-family:Georgia,serif;font-style:italic;font-size:12px;color:#6BC4B4;letter-spacing:4px;margin-bottom:48px;opacity:0.7}
+#lp-root .lp-h1{font-family:Georgia,serif;font-weight:normal;font-size:46px;color:#fff;line-height:1.6;letter-spacing:1px;margin-bottom:32px}
+#lp-root .lp-h1 br{display:none}
+#lp-root .lp-hero-sub{font-size:17px;font-weight:300;line-height:2;color:rgba(255,255,255,0.6);max-width:520px;margin:0 auto 48px;letter-spacing:0.5px;white-space:nowrap}
+#lp-root .lp-hero-en{font-family:Georgia,serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.2);margin-top:24px;letter-spacing:3px}
+#lp-root .lp-scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);width:1px;height:40px;background:linear-gradient(180deg,rgba(255,255,255,0.2),transparent)}
+#lp-root .lp-feature{display:flex;gap:40px;align-items:baseline;padding:36px 0;border-top:1px solid #E5E7EB}
+#lp-root .lp-feature-last{border-top:1px solid #E5E7EB}
+#lp-root .lp-fnum{font-family:Georgia,serif;font-size:15px;color:#6BC4B4;flex:0 0 32px;letter-spacing:1px}
+#lp-root .lp-ft{font-size:17px;font-weight:600;line-height:1.7;color:#1F2937;flex:0 0 300px}
+#lp-root .lp-fd{font-size:14px;font-weight:400;line-height:2;color:#6B7280;flex:1}
+#lp-root .lp-how{background:#F5F6F8}
+#lp-root .lp-steps{display:flex}
+#lp-root .lp-step{flex:1;padding:0 28px}
+#lp-root .lp-step + .lp-step{border-left:1px solid #E5E7EB}
+#lp-root .lp-step-who{font-size:11px;font-weight:500;margin-bottom:6px;letter-spacing:0.5px}
+#lp-root .lp-step-who.you{color:#E8651A}
+#lp-root .lp-step-who.previo{color:#4BA89A}
+#lp-root .lp-step h3{font-size:20px;font-weight:600;color:#1F2937;margin-bottom:14px}
+#lp-root .lp-step p{font-size:13px;font-weight:400;line-height:2;color:#6B7280}
+#lp-root .lp-step-dotcol{display:none}
+#lp-root .lp-problem{background:#003580;padding:112px 48px;position:relative;overflow:hidden;text-align:center}
+#lp-root .lp-problem-in{max-width:640px;margin:0 auto}
+#lp-root .lp-problem h2{font-family:Georgia,serif;font-weight:normal;font-size:28px;color:#fff;line-height:1.8;margin-bottom:36px}
+#lp-root .lp-problem-txt{font-size:15px;font-weight:300;line-height:2.4;color:rgba(255,255,255,0.5);margin-bottom:48px}
+#lp-root .lp-video{width:100%;aspect-ratio:16/9;border-radius:16px;background:#0A1628;display:block}
+#lp-root .lp-trust{background:#003580}
+#lp-root .lp-trust .lp-h2{color:#fff;margin-bottom:48px}
+#lp-root .lp-trust-cards{display:flex;gap:24px}
+#lp-root .lp-trust-card{flex:1;padding:36px 40px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12)}
+#lp-root .lp-trust-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+#lp-root .lp-trust-head h3{font-size:18px;font-weight:600;color:#fff}
+#lp-root .lp-trust-card p{font-size:14px;font-weight:300;line-height:2;color:rgba(255,255,255,0.55)}
+#lp-root .lp-privacy-card{background:#F5F6F8;border-radius:20px;padding:64px 56px;border:1px solid #E5E7EB;display:flex;gap:56px;align-items:center}
+#lp-root .lp-privacy-txt{flex:1 1 50%}
+#lp-root .lp-privacy-h{font-family:Georgia,serif;font-weight:normal;font-size:24px;color:#003580;line-height:1.7;margin-bottom:20px}
+#lp-root .lp-privacy-p{font-size:14px;font-weight:400;line-height:2;color:#6B7280}
+#lp-root .lp-checks{flex:0 0 300px;display:flex;flex-direction:column;gap:28px}
+#lp-root .lp-check{display:flex;align-items:center;gap:16px}
+#lp-root .lp-check-i{width:26px;height:26px;border-radius:50%;background:#6BC4B4;color:#fff;font-size:14px;font-weight:700;line-height:26px;text-align:center;flex-shrink:0}
+#lp-root .lp-check span:last-child{font-size:16px;font-weight:500;color:#1F2937}
+#lp-root .lp-voices{background:#F5F6F8}
+#lp-root .lp-voices .lp-h2{margin-bottom:40px}
+#lp-root .lp-voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+#lp-root .lp-voice-card{display:block;background:#fff;border-radius:16px;border:1px solid #E5E7EB;padding:32px 36px}
+#lp-root .lp-voice-card p:first-child{font-size:17px;font-weight:600;line-height:1.9;color:#003580;margin-bottom:14px}
+#lp-root .lp-voice-card p:last-child{font-size:13px;font-weight:400;color:#6B7280}
+#lp-root .lp-voices-more{font-size:14px;font-weight:500;color:#4BA89A}
+#lp-root .lp-voices-more-wrap{margin-top:24px;text-align:right}
+#lp-root .lp-final{background:#003580;text-align:center}
+#lp-root .lp-final h2{font-family:Georgia,serif;font-weight:normal;font-size:26px;color:#fff;line-height:1.7;margin-bottom:12px}
+#lp-root .lp-final-en{font-family:Georgia,serif;font-style:italic;font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:2px;margin-bottom:36px}
+#lp-root .lp-footer{background:#003580;padding:40px 48px}
+#lp-root .lp-footer-in{max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+#lp-root .lp-footer img{height:72px;width:auto;display:block}
+#lp-root .lp-footer-links{display:flex;gap:24px}
+#lp-root .lp-footer-links a{font-size:11px;color:rgba(255,255,255,0.5)}
+#lp-root .lp-copy{max-width:860px;margin:24px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.4);text-align:center}
+@media (max-width:767px){
+#lp-root .lp-header-in{padding:0 20px;height:56px}
+#lp-root .lp-logo{font-size:13px}
+#lp-root .lp-login{padding:7px 16px}
+#lp-root .lp-sec{padding:72px 24px}
+#lp-root .lp-hero{padding:120px 24px 80px}
+#lp-root .lp-hero-sub{font-size:15px;letter-spacing:0}
+#lp-root .lp-hero-kicker{letter-spacing:3px;margin-bottom:32px}
+#lp-root .lp-h1{font-size:28px;letter-spacing:0;margin-bottom:24px;white-space:nowrap}
+#lp-root .lp-h1 br{display:inline}
+#lp-root .lp-feature{flex-direction:column;gap:10px;padding:24px 0;border-top:none;align-items:flex-start}
+#lp-root .lp-feature-last{border-top:none}
+#lp-root .lp-fnum{font-size:24px;letter-spacing:2px;flex:none}
+#lp-root .lp-ft{font-size:18px;flex:none}
+#lp-root .lp-fd{flex:none}
+#lp-root .lp-steps{flex-direction:column}
+#lp-root .lp-step{padding:0;display:flex;gap:20px}
+#lp-root .lp-step + .lp-step{border-left:none}
+#lp-root .lp-step-dotcol{display:flex;flex-direction:column;align-items:center;width:24px;flex-shrink:0}
+#lp-root .lp-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+#lp-root .lp-dot.o{background:#E8651A}
+#lp-root .lp-dot.t{background:#4BA89A}
+#lp-root .lp-line{width:1.5px;flex:1;background:linear-gradient(180deg,#E8651A,#4BA89A)}
+#lp-root .lp-step-body{padding-bottom:36px;flex:1}
+#lp-root .lp-step:last-child .lp-step-body{padding-bottom:0}
+#lp-root .lp-step p{font-size:14px}
+#lp-root .lp-problem{padding:96px 24px}
+#lp-root .lp-trust-cards{flex-direction:column;gap:16px}
+#lp-root .lp-trust-card{padding:28px 24px}
+#lp-root .lp-privacy-card{flex-direction:column;padding:36px 24px;gap:28px;align-items:stretch;border-radius:16px}
+#lp-root .lp-privacy-h{font-size:22px}
+#lp-root .lp-privacy-p{font-size:15px}
+#lp-root .lp-checks{flex:none;gap:20px}
+#lp-root .lp-check-i{width:24px;height:24px;font-size:13px;line-height:24px}
+#lp-root .lp-check span:last-child{font-size:15px}
+#lp-root .lp-voice-grid{grid-template-columns:1fr;gap:16px}
+#lp-root .lp-voice-card{padding:24px}
+#lp-root .lp-footer{padding:40px 24px}
+}
+</style>
+
+<header class="lp-header scrolled" id="lp-hd" style="">
+  <div class="lp-header-in">
+    <span class="lp-logo">PREVIO</span>
+    <a class="lp-login" href="https://previo.jp/login">ログイン</a>
+  </div>
+</header>
+
+<section class="lp-hero">
+  <div class="lp-reveal vis"><p class="lp-hero-kicker">AI転職エージェント</p></div>
+  <div class="lp-reveal vis" style="transition-delay:0.15s"><h1 class="lp-h1">年収アップの機会を、<br>見逃さない</h1></div>
+  <div class="lp-reveal vis" style="transition-delay:0.3s"><p class="lp-hero-sub">AI転職エージェントが、市場を調査し、<br>あなたに合う求人を、お届けします。</p></div>
+  <div class="lp-reveal vis" style="transition-delay:0.45s"><a class="lp-cta" href="https://previo.jp/login">無料で始める</a></div>
+  <div class="lp-reveal vis" style="transition-delay:0.55s"><p class="lp-hero-en">Preview your next chapter.</p></div>
+  <div class="lp-scroll-hint"></div>
+</section>
+
+<section class="lp-sec">
+  <div class="lp-in">
+    <div class="lp-reveal vis">
+      <p class="lp-eyebrow">Why PREVIO</p>
+      <h2 class="lp-h2">PREVIOにできること。</h2>
+    </div>
+    <div class="lp-feature lp-reveal vis">
+      <span class="lp-fnum">01</span>
+      <h3 class="lp-ft">登録後すぐ、あなた専用のマッチ求人をお届け</h3>
+      <p class="lp-fd">登録しておくだけで、あなたに合うポジションを見つけてお届けします。あなたが探す必要はありません。</p>
+    </div>
+    <div class="lp-feature lp-reveal vis">
+      <span class="lp-fnum">02</span>
+      <h3 class="lp-ft">「マッチする理由」を言語化</h3>
+      <p class="lp-fd">「なぜこの求人があなたに合うのか」を、分かりやすく説明します。</p>
+    </div>
+    <div class="lp-feature lp-reveal vis">
+      <span class="lp-fnum">03</span>
+      <h3 class="lp-ft">非公開求人もカバー</h3>
+      <p class="lp-fd">各業界・職種に強みを持つ人材紹介会社と提携。非公開求人を含む、質の高い求人の中からお届けします。</p>
+    </div>
+    <div class="lp-feature-last"></div>
+  </div>
+</section>
+
+<section class="lp-sec lp-how">
+  <div class="lp-in">
+    <div class="lp-reveal vis">
+      <p class="lp-eyebrow">How it works</p>
+      <h2 class="lp-h2">PREVIOの使い方。</h2>
+    </div>
+    <div class="lp-steps">
+      <div class="lp-step lp-reveal vis">
+        <div class="lp-step-dotcol"><div class="lp-dot o"></div><div class="lp-line"></div></div>
+        <div class="lp-step-body">
+          <p class="lp-step-who you">あなたが</p>
+          <h3>登録する</h3>
+          <p>ファイルをアップロードすれば、AIが経歴を自動で読み取ります。入力の手間は最小限です。</p>
+        </div>
+      </div>
+      <div class="lp-step lp-reveal vis" style="transition-delay:0.1s">
+        <div class="lp-step-dotcol"><div class="lp-dot t"></div><div class="lp-line"></div></div>
+        <div class="lp-step-body">
+          <p class="lp-step-who previo">PREVIOが</p>
+          <h3>届ける</h3>
+          <p>あなた専用のマッチ求人を厳選。あなたに合う理由を、分かりやすくお伝えします。</p>
+        </div>
+      </div>
+      <div class="lp-step lp-reveal vis" style="transition-delay:0.2s">
+        <div class="lp-step-dotcol"><div class="lp-dot o"></div></div>
+        <div class="lp-step-body">
+          <p class="lp-step-who you">あなたが</p>
+          <h3>選ぶ</h3>
+          <p>求人を見て、本当に気になる求人をピックアップ。重視する条件が変われば、提案求人も変わります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-problem">
+  <div class="lp-problem-in">
+    <div class="lp-reveal vis"><p class="lp-eyebrow on-navy" style="margin-bottom:24px;opacity:0.8">The Problem</p></div>
+    <div class="lp-reveal vis" style="transition-delay:0.1s"><h2>いまのキャリア探し、<br>あなたに合っていますか？</h2></div>
+    <div class="lp-reveal vis" style="transition-delay:0.2s">
+      <p class="lp-problem-txt">
+        転職サイトに登録すれば、大量のスカウトが届く。<br>
+        自分で調べれば、何百件もの求人に埋もれる。<br>
+        求人票を読んでも、よく分からない。<br><br>
+        PREVIOは、量ではなく精度で応えます。<br>
+        あなたの経験や志向性を深く理解し、<br>
+        最適な求人と、その理由を届ける。<br><br>
+        それが、AI転職エージェントという新しい選択肢です。
+      </p>
+    </div>
+    <div class="lp-reveal vis" style="transition-delay:0.3s"><a class="lp-cta" href="https://previo.jp/login">無料で始める</a></div>
+  </div>
+</section>
+
+<section class="lp-sec">
+  <div class="lp-in">
+    <div class="lp-reveal vis">
+      <p class="lp-eyebrow">Concept Movie</p>
+      <h2 class="lp-h2" style="margin-bottom:48px">PREVIOのコンセプト。</h2>
+    </div>
+    <div class="lp-reveal vis" style="transition-delay:0.1s">
+      <video class="lp-video" controls="" preload="metadata" src="https://previo.jp/videos/intro-20260902.mp4"></video>
+    </div>
+  </div>
+</section>
+
+<section class="lp-sec lp-trust">
+  <div class="lp-in">
+    <div class="lp-reveal vis">
+      <p class="lp-eyebrow on-navy">Trust</p>
+      <h2 class="lp-h2">確かな技術。</h2>
+    </div>
+    <div class="lp-trust-cards">
+      <div class="lp-trust-card lp-reveal vis">
+        <div class="lp-trust-head">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6BC4B4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 7.5 21l4.5-2.5L16.5 21 15 14.5"></path></svg>
+          <h3>特許技術を搭載</h3>
+        </div>
+        <p>特許第7825249号・特許第7889816号 取得済み</p>
+      </div>
+      <div class="lp-trust-card lp-reveal vis" style="transition-delay:0.1s">
+        <div class="lp-trust-head">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6BC4B4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M8 21h8"></path><path d="M4 7h16"></path><path d="M6 7 3.5 12.5a2.8 2.8 0 0 0 5 0L6 7Z"></path><path d="M18 7l-2.5 5.5a2.8 2.8 0 0 0 5 0L18 7Z"></path></svg>
+          <h3>完全中立なアルゴリズム</h3>
+        </div>
+        <p>企業側の手数料等は一切排除。あなたの経歴や志向とのマッチングを追求</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-sec">
+  <div class="lp-in">
+    <div class="lp-reveal vis">
+      <div class="lp-privacy-card">
+        <div class="lp-privacy-txt">
+          <p class="lp-eyebrow">Privacy</p>
+          <h2 class="lp-privacy-h">あなたの情報は、<br>企業やエージェントには<br>公開されません。</h2>
+          <p class="lp-privacy-p">自分の意志で応募するまで、登録情報は採用企業や人材紹介会社に開示されません。転職を考え始める前から、安心してご利用いただけます。</p>
+        </div>
+        <div class="lp-checks">
+          <div class="lp-check"><span class="lp-check-i">✓</span><span>応募するまで、情報は一切非開示</span></div>
+          <div class="lp-check"><span class="lp-check-i">✓</span><span>完全無料</span></div>
+          <div class="lp-check"><span class="lp-check-i">✓</span><span>いつでも退会可能</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-sec lp-voices">
+  <div class="lp-in">
+    <div class="lp-reveal vis">
+      <p class="lp-eyebrow">Voices</p>
+      <h2 class="lp-h2">利用者の声</h2>
+    </div>
+    <div class="lp-reveal lp-voice-grid vis" style="transition-delay:0.1s">
+      <a class="lp-voice-card" href="https://previo.jp/media/voices/case01">
+        <p>生成AIに聞いてたどり着いた、”精度が段違い”のAI転職サービス</p>
+        <p>Aさん（ITエンジニア）</p>
+      </a>
+      <a class="lp-voice-card" href="https://previo.jp/media/voices/case02">
+        <p>情報収集のために登録したら、“自分では思いつかない選択肢”を届けてくれた</p>
+        <p>Bさん（カスタマーサクセス）</p>
+      </a>
+    </div>
+    <div class="lp-reveal lp-voices-more-wrap vis" style="transition-delay:0.2s">
+      <a class="lp-voices-more" href="https://previo.jp/media/voices/">インタビュー記事一覧へ →</a>
+    </div>
+  </div>
+</section>
+
+<section class="lp-sec lp-final">
+  <div class="lp-reveal vis">
+    <h2>自分に合う企業がすぐに分かる</h2>
+    <p class="lp-final-en">Preview your next chapter.</p>
+    <a class="lp-cta" href="https://previo.jp/login" style="padding:16px 56px">無料で登録する</a>
+  </div>
+</section>
+
+<footer class="lp-footer">
+  <div class="lp-footer-in">
+    <img decoding="async" src="https://previo.jp/previo-logo.jpg" alt="PREVIO - Preview your next chapter.">
+    <div class="lp-footer-links">
+      <a href="https://our-story.co.jp/">会社概要</a>
+      <a href="https://our-story.co.jp/privacy">プライバシーポリシー</a>
+    </div>
+  </div>
+  <p class="lp-copy">© 2026 OurStory Inc. All Rights Reserved.</p>
+</footer>
+
+<script>
+(function(){
+  var hd = document.getElementById('lp-hd');
+  window.addEventListener('scroll', function(){
+    if (hd) hd.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+  var obs = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, {threshold:0.12});
+  document.querySelectorAll('#lp-root .lp-reveal').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+</div>
+
+
+
+<p class="wp-block-paragraph"></p>
+
+
+
+
+
+<p class="wp-block-paragraph"></p>
+</div>
+</div>
+<script type="text/javascript" crossorigin="anonymous" src="/ingest/static/1.438.7/surveys.js"></script><script type="text/javascript" crossorigin="anonymous" src="/ingest/array/phc_rUdFRdgoemyNmUoLmYw6m6TR9inWwddpmXHjLE9uFhWK/config.js"></script><script type="text/javascript" crossorigin="anonymous" src="/ingest/static/1.438.7/dead-clicks-autocapture.js"></script><script type="text/javascript" crossorigin="anonymous" src="/ingest/static/1.438.7/posthog-recorder.js"></script><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/previo-media/*","/wp-content/themes/twentytwentyfive/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script type="application/ld+json" id="slim-seo-schema">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://previo.jp/media/#website","url":"https://previo.jp/media/","name":"PREVIO","inLanguage":"ja","potentialAction":{"@id":"https://previo.jp/media/#searchaction"},"publisher":{"@id":"https://previo.jp/media/#organization"}},{"@type":"SearchAction","@id":"https://previo.jp/media/#searchaction","target":"https://previo.jp/media/?s={search_term_string}","query-input":"required name=search_term_string"},{"@type":"BreadcrumbList","name":"パンくずリスト","@id":"https://previo.jp/media/lp/_02/#breadcrumblist","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://previo.jp/media/"},{"@type":"ListItem","position":2,"name":"lp","item":"https://previo.jp/media/category/lp/"},{"@type":"ListItem","position":3,"name":"lp_02_年収アップの機会を、見逃さない"}]},{"@type":"WebPage","@id":"https://previo.jp/media/lp/_02/#webpage","url":"https://previo.jp/media/lp/_02/","inLanguage":"ja","name":"lp_02_年収アップの機会を、見逃さない – PREVIO","description":"PREVIO ログイン AI転職エージェント 年収アップの機会を、 見逃さない AI転職エージェントが、市場を調査し、 あなたに合う求人を、お届けします。 無料で始める Preview your next chapter. Why PREVIO PREVIOにできること。 01 登録後すぐ、あなた専用のマッチ求人をお届","datePublished":"2026-10-01T17:05:33+09:00","dateModified":"2026-10-01T17:10:47+09:00","isPartOf":{"@id":"https://previo.jp/media/#website"},"breadcrumb":{"@id":"https://previo.jp/media/lp/_02/#breadcrumblist"},"potentialAction":{"@id":"https://previo.jp/media/lp/_02/#readaction"},"primaryImageOfPage":{"@id":"https://previo.jp/media/lp/_02/#thumbnail"},"image":{"@id":"https://previo.jp/media/lp/_02/#thumbnail"}},{"@type":"ReadAction","@id":"https://previo.jp/media/lp/_02/#readaction","target":"https://previo.jp/media/lp/_02/"},{"@type":"Organization","@id":"https://previo.jp/media/#organization","url":"https://previo.jp/media/","name":"PREVIO"},{"@type":"ImageObject","@id":"https://previo.jp/media/lp/_02/#thumbnail","url":"https://previo.jp/previo-logo.jpg"},{"@type":"Article","@id":"https://previo.jp/media/lp/_02/#article","url":"https://previo.jp/media/lp/_02/","headline":"lp_02_年収アップの機会を、見逃さない","datePublished":"2026-10-01T17:05:33+09:00","dateModified":"2026-10-01T17:10:47+09:00","wordCount":40,"articleSection":["lp"],"isPartOf":{"@id":"https://previo.jp/media/lp/_02/#webpage"},"mainEntityOfPage":{"@id":"https://previo.jp/media/lp/_02/#webpage"},"image":{"@id":"https://previo.jp/media/lp/_02/#thumbnail"},"publisher":{"@id":"https://previo.jp/media/#organization"},"author":{"@id":"https://previo.jp/media/#/schema/person/4fb2e4b7d8eb3d6f4181ac9456f23b0c"}},{"@type":"Person","@id":"https://previo.jp/media/#/schema/person/4fb2e4b7d8eb3d6f4181ac9456f23b0c","name":"渡辺","image":"https://secure.gravatar.com/avatar/4e089f98a2b62761ddf1106ff83aae9a5a8b86911e8b58ac0bfb8dbdc5921881?s=96&d=mm&r=g"}]}</script><script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://previo.jp/media/wp-includes/js/wp-emoji-release.min.js?ver=7.1.3"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://previo.jp/media/wp-includes/js/wp-emoji-loader.min.js
+</script>
+
+
+<script type="text/javascript" id="" charset="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","2110952206171347");fbq("track","PageView");</script></body>
