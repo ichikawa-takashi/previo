@@ -328,14 +328,15 @@ html.show-fixed-header .fixed-header { transform: translateY(0); opacity: 1; tra
    ========================================================= */
 .problem { position: relative; z-index: 1; background: var(--color-blue-700); clip-path: inset(0); padding-bottom: 6rem; }
 @media (min-width: 800px) { .problem { padding-bottom: 12.8rem; } }
-.problem__photos { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; z-index: -1; }
-.problem__photos-inner { position: sticky; top: 0; width: 100%; height: 100vh; overflow-x: clip; }
-.problem__photo { position: absolute; will-change: transform; }
+/* iOS の URL バー開閉で高さが変わらないよう lvh で固定 */
+.problem__photos { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1; }
+.problem__photos-inner { position: sticky; top: 0; width: 100%; height: 100vh; height: 100lvh; overflow-x: clip; }
+.problem__photo { position: absolute; top: 0; will-change: transform; }
 .problem__photo img { border-radius: 1.2rem; }
 @media (min-width: 800px) { .problem__photo img { border-radius: 2.4rem; } }
 .problem__message { position: relative; height: var(--height, 200vh); padding-bottom: 40rem; }
 @media (min-width: 800px) { .problem__message { padding-bottom: 102rem; } }
-.problem__sticky { position: sticky; top: var(--top, 0%); }
+.problem__sticky { position: sticky; top: var(--top, 0%); transform: scale(var(--scale, 1)); transform-origin: 50% 0; }
 
 /* How it works cards (Human Eyes member's voice) */
 .cards { position: relative; z-index: 2; height: var(--height, 100vh); }

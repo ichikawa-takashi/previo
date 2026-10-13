@@ -4,11 +4,19 @@
    ========================================================= */
 (() => {
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
   const isPC = () => window.innerWidth >= 800;
+  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  // iOS は URL バーの開閉で innerHeight が変わるため、100svh（URL バー表示時の高さ）を測って使う
+  // 横幅が変わったときだけ更新する
+  const vhProbe = document.createElement('div');
+  vhProbe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100vh;visibility:hidden;pointer-events:none;';
+  vhProbe.style.height = '100svh';
+  document.body.appendChild(vhProbe);
+  const measureVH = () => vhProbe.offsetHeight || window.innerHeight;
+  let stableVH = measureVH();
   const rem = (v) => v * parseFloat(getComputedStyle(document.documentElement).fontSize);
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const sineInOut = (t) => -(Math.cos(Math.PI * t) - 1) / 2;
 
   /* ---------- Lenis（Human Eyes: duration 1） ---------- */
   const lenis = new Lenis({ duration: 1 });
@@ -193,31 +201,40 @@
   });
 
   /* ---------- The Problem（Human Eyes SMILE the NEXT） ---------- */
+  // 写真はテキストが固定表示されている間に等間隔で画面中央を通過させる（左右交互・端寄せは HTML 側）
+  // 高さは stableVH を使い、iOS の URL バー開閉で位置が飛ばないようにする
   const message = document.querySelector('.js-problem-message');
   const sticky = document.querySelector('.js-problem-sticky');
+  const photos = [...document.querySelectorAll('.js-photo')].map((el) => ({
+    el, k: parseFloat(el.dataset.lerp), s: parseFloat(el.dataset.speed), at: 0, h: 0, cur: window.scrollY,
+  }));
   function layoutProblem() {
     message.style.setProperty('--height', isPC() ? '300rem' : '280rem');
-    sticky.style.setProperty('--top', (window.innerHeight - sticky.offsetHeight) / 2 + 'px');
+    // 固定表示中にコンテンツが見切れないよう、ヘッダー分と余白を除いた高さに収まらなければ縮小する
+    const header = document.getElementById('fixedHeader');
+    const space = rem(isPC() ? 2.4 : 1.6);
+    const safeTop = (header ? header.offsetHeight : 0) + space;
+    const avail = stableVH - safeTop - space;
+    const scale = Math.min(1, avail / sticky.offsetHeight);
+    sticky.style.setProperty('--scale', scale);
+    sticky.style.setProperty('--top', Math.max(safeTop, (stableVH - sticky.offsetHeight * scale) / 2) + 'px');
+    const r = message.getBoundingClientRect();
+    const from = r.top + window.scrollY - stableVH * 0.3;
+    const to = r.bottom + window.scrollY - stableVH * 1.2;
+    photos.forEach((p, i) => {
+      p.at = from + ((to - from) * (i + 0.5)) / photos.length;
+      p.h = p.el.offsetHeight;
+    });
   }
-  const problem = document.getElementById('problem');
-  const photos = [...document.querySelectorAll('.js-photo')].map((el) => ({
-    el, k: parseFloat(el.dataset.lerp), off: parseFloat(el.dataset.offset), cur: 1,
-  }));
-  let problemProgress = 0;
-  ScrollTrigger.create({
-    trigger: problem,
-    start: 'top 100%',
-    end: () => `bottom+=${problem.offsetHeight * 0.1} 0%`,
-    onUpdate: (s) => { problemProgress = s.progress; },
-  });
-  gsap.ticker.add(() => {
-    const endVal = isPC() ? -1 : -1.1;
-    const vh = window.innerHeight * (isPC() ? 1.35 : 1.2);
+  // 画像読み込みで上部の高さが変わった場合に備えて再計測
+  window.addEventListener('load', layoutProblem);
+  gsap.ticker.add((time, dt) => {
+    const y = window.scrollY;
     photos.forEach((p) => {
-      const t = sineInOut(clamp(problemProgress + p.off));
-      const target = 1 + (endVal - 1) * t;
-      p.cur = p.cur * p.k + target * (1 - p.k);
-      p.el.style.transform = `translate3d(0,${vh * p.cur}px,0)`;
+      // フレームレートに依存しない lerp（60fps 基準）
+      p.cur = y + (p.cur - y) * Math.pow(p.k, dt / 16.67);
+      const ty = (stableVH - p.h) / 2 - (p.cur - p.at) * p.s;
+      p.el.style.transform = `translate3d(0,${ty}px,0)`;
     });
   });
 
@@ -230,7 +247,7 @@
     if (!cards) return;
     if (isPC()) {
       cards.style.setProperty('--height', 450 * cardsList.children.length + 'px');
-      cardsSticky.style.setProperty('--top', (window.innerHeight - cardsSticky.offsetHeight) / 2 + 'px');
+      cardsSticky.style.setProperty('--top', (stableVH - cardsSticky.offsetHeight) / 2 + 'px');
     } else {
       cards.style.removeProperty('--height');
       cardsSticky.style.setProperty('--top', '0px');
@@ -379,5 +396,12 @@
     playOpening();
   });
   let rt;
-  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layoutAll, 150); });
+  let lastW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    // タッチ端末で高さだけ変わった場合（URL バーの開閉）は再レイアウトしない
+    if (isTouch && window.innerWidth === lastW) return;
+    lastW = window.innerWidth;
+    clearTimeout(rt);
+    rt = setTimeout(() => { stableVH = measureVH(); layoutAll(); }, 150);
+  });
 })();
