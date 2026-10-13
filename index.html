@@ -16,10 +16,8 @@
       set();
       window.addEventListener('resize', set);
       d.classList.remove('no-js');
-      // オープニングを見たか（同じセッションで2回目以降はスキップ）
-      var opened = false;
-      try { opened = !!sessionStorage.getItem('previo-opened'); } catch (e) {}
-      d.classList.add(opened ? 'is-opened' : 'is-opening', 'is-loading');
+      // オープニングは読み込みのたびに毎回再生
+      d.classList.add('is-opening', 'is-loading');
       // JS が読み込めなかった場合の保険
       setTimeout(function () { d.classList.remove('is-loading', 'is-opening'); }, 5000);
     })();
@@ -140,51 +138,42 @@
       </a>
     </section>
 
-    <!-- ===================== Why PREVIO（Human Eyes service） ===================== -->
+    <!-- ===================== Why PREVIO（Human Eyes service の開閉を横方向に） ===================== -->
     <section class="bg-mist pb-[8rem] pc:pb-[16rem]" id="why">
       <div class="w-[35.5rem] pc:w-[136.4rem] mx-auto rounded-[2rem] pc:rounded-[3.2rem] bg-white pt-[2.4rem] pl-[2rem] pr-[2rem] pb-[6rem] pc:pt-[4.2rem] pc:pl-[4.4rem] pc:pr-[4.4rem] pc:pb-[10rem]">
         <p class="c-label">Why PREVIO</p>
         <h2 class="pt-[2.4rem] pc:pt-[3rem] font-black text-[2.2rem] pc:text-[3rem] leading-[1.4] tracking-[.06rem]"><span class="hl">PREVIO</span>にできること。</h2>
       </div>
 
-      <ul class="why-list js-why w-[37.5rem] pc:w-[144rem] mx-auto -mt-[2.6rem]">
-        <li class="why-item is-active">
-          <div class="why-item__head">
-            <div class="why-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-01"/></svg></div>
-            <span class="why-item__num">01</span>
-            <h3>登録後すぐ、あなた専用のマッチ求人をお届け</h3>
+      <ul class="why2 js-why2 w-[35.5rem] pc:w-[136.4rem] mx-auto -mt-[2.6rem]">
+        <li class="why2-item is-active">
+          <div class="why2-item__head">
+            <div class="why2-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-01"/></svg></div>
+            <h3><span class="why2-item__num">01</span>登録後すぐ、あなた専用のマッチ求人をお届け</h3>
           </div>
-          <div class="why-item__body">
-            <div class="w-[33.5rem] pc:w-[128rem] mx-auto pb-[6.4rem] pc:pb-[7.2rem] pc:flex pc:gap-[4.8rem]">
-              <div class="w-full pc:w-[32.3rem] h-[20rem] pc:h-[20.9rem] shrink-0 rounded-[1.6rem] pc:rounded-[2.4rem] overflow-hidden"><img src="assets/images/why-01.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
-              <p class="pt-[2rem] pc:pt-0 text-[1.4rem] leading-[1.75]">登録しておくだけで、あなたに合うポジションを見つけてお届けします。あなたが探す必要はありません。</p>
-            </div>
+          <div class="why2-item__body">
+            <div class="why2-item__photo"><img src="assets/images/why-01.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+            <p class="why2-item__text">登録しておくだけで、あなたに合うポジションを見つけてお届けします。あなたが探す必要はありません。</p>
           </div>
         </li>
-        <li class="why-item">
-          <div class="why-item__head">
-            <div class="why-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-02"/></svg></div>
-            <span class="why-item__num">02</span>
-            <h3>「マッチする理由」を言語化</h3>
+        <li class="why2-item">
+          <div class="why2-item__head">
+            <div class="why2-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-02"/></svg></div>
+            <h3><span class="why2-item__num">02</span>「マッチする理由」を言語化</h3>
           </div>
-          <div class="why-item__body">
-            <div class="w-[33.5rem] pc:w-[128rem] mx-auto pb-[6.4rem] pc:pb-[7.2rem] pc:flex pc:gap-[4.8rem]">
-              <div class="w-full pc:w-[32.3rem] h-[20rem] pc:h-[20.9rem] shrink-0 rounded-[1.6rem] pc:rounded-[2.4rem] overflow-hidden"><img src="assets/images/why-02.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
-              <p class="pt-[2rem] pc:pt-0 text-[1.4rem] leading-[1.75]">「なぜこの求人があなたに合うのか」を、分かりやすく説明します。</p>
-            </div>
+          <div class="why2-item__body">
+            <div class="why2-item__photo"><img src="assets/images/why-02.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+            <p class="why2-item__text">「なぜこの求人があなたに合うのか」を、分かりやすく説明します。</p>
           </div>
         </li>
-        <li class="why-item">
-          <div class="why-item__head">
-            <div class="why-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-03"/></svg></div>
-            <span class="why-item__num">03</span>
-            <h3>非公開求人もカバー</h3>
+        <li class="why2-item">
+          <div class="why2-item__head">
+            <div class="why2-item__icon"><svg class="w-full h-full" aria-hidden="true"><use href="#i-why-03"/></svg></div>
+            <h3><span class="why2-item__num">03</span>非公開求人もカバー</h3>
           </div>
-          <div class="why-item__body">
-            <div class="w-[33.5rem] pc:w-[128rem] mx-auto pb-[6.4rem] pc:pb-[7.2rem] pc:flex pc:gap-[4.8rem]">
-              <div class="w-full pc:w-[32.3rem] h-[20rem] pc:h-[20.9rem] shrink-0 rounded-[1.6rem] pc:rounded-[2.4rem] overflow-hidden"><img src="assets/images/why-03.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
-              <p class="pt-[2rem] pc:pt-0 text-[1.4rem] leading-[1.75]">各業界・職種に強みを持つ人材紹介会社と提携。非公開求人を含む、質の高い求人の中からお届けします。</p>
-            </div>
+          <div class="why2-item__body">
+            <div class="why2-item__photo"><img src="assets/images/why-03.webp" alt="" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+            <p class="why2-item__text">各業界・職種に強みを持つ人材紹介会社と提携。非公開求人を含む、質の高い求人の中からお届けします。</p>
           </div>
         </li>
       </ul>
@@ -224,35 +213,31 @@
         </div>
       </div>
 
-      <div class="cards js-cards">
-        <div class="cards__sticky js-cards-sticky">
-          <div class="w-[33.5rem] pc:w-[128rem] mx-auto">
-            <p class="c-label c-label--inverse">How it works</p>
-            <h2 class="pt-[2.4rem] pc:pt-[3rem] text-white font-black text-[2.2rem] pc:text-[3rem] leading-[1.4] tracking-[.06rem]">PREVIOの使い方。</h2>
-          </div>
-          <div class="cards__wrapper pt-[3.2rem] pc:pt-[4.8rem]">
-            <ol class="cards__list js-cards-list">
-              <li class="card">
-                <p class="card__number">01</p>
-                <h3 class="card__title">あなたが登録する</h3>
-                <div class="card__il"><img src="assets/images/how-01.webp" alt="スマホから書類をアップロードし、AIが読み取るイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
-                <p class="card__text">ファイルをアップロードすれば、AIが経歴を自動で読み取ります。入力の手間は最小限です。</p>
-              </li>
-              <li class="card">
-                <p class="card__number">02</p>
-                <h3 class="card__title">PREVIOが届ける</h3>
-                <div class="card__il"><img src="assets/images/how-02.webp" alt="AIが求人カードを選んで届けるイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
-                <p class="card__text">あなた専用のマッチ求人を厳選。あなたに合う理由を、分かりやすくお伝えします。</p>
-              </li>
-              <li class="card">
-                <p class="card__number">03</p>
-                <h3 class="card__title">あなたが選ぶ</h3>
-                <div class="card__il"><img src="assets/images/how-03.webp" alt="並んだカードから1枚を選ぶ人のイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
-                <p class="card__text">求人を見て、本当に気になる求人をピックアップ。重視する条件が変われば、提案求人も変わります。</p>
-              </li>
-            </ol>
-          </div>
+      <div class="relative z-[2]">
+        <div class="w-[33.5rem] pc:w-[128rem] mx-auto">
+          <p class="c-label c-label--inverse">How it works</p>
+          <h2 class="pt-[2.4rem] pc:pt-[3rem] text-white font-black text-[2.2rem] pc:text-[3rem] leading-[1.4] tracking-[.06rem]">PREVIOの使い方。</h2>
         </div>
+        <ol class="how2__list js-reveal pt-[3.2rem] pc:pt-[4.8rem]">
+          <li class="card">
+            <p class="card__number">01</p>
+            <h3 class="card__title">あなたが登録する</h3>
+            <div class="card__il"><img src="assets/images/how-01.webp" alt="スマホから書類をアップロードし、AIが読み取るイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
+            <p class="card__text">ファイルをアップロードすれば、AIが経歴を自動で読み取ります。入力の手間は最小限です。</p>
+          </li>
+          <li class="card">
+            <p class="card__number">02</p>
+            <h3 class="card__title">PREVIOが届ける</h3>
+            <div class="card__il"><img src="assets/images/how-02.webp" alt="AIが求人カードを選んで届けるイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
+            <p class="card__text">あなた専用のマッチ求人を厳選。あなたに合う理由を、分かりやすくお伝えします。</p>
+          </li>
+          <li class="card">
+            <p class="card__number">03</p>
+            <h3 class="card__title">あなたが選ぶ</h3>
+            <div class="card__il"><img src="assets/images/how-03.webp" alt="並んだカードから1枚を選ぶ人のイラスト" class="block w-full aspect-[4/3] object-contain" width="1000" height="750" loading="lazy" decoding="async"></div>
+            <p class="card__text">求人を見て、本当に気になる求人をピックアップ。重視する条件が変われば、提案求人も変わります。</p>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -265,14 +250,14 @@
               <img src="assets/images/movie-poster.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async">
               <video src="https://previo.jp/videos/intro-20260902.mp4" preload="metadata" playsinline></video>
             </div>
+            <button type="button" class="mcard__play js-hover c-circle c-circle--m" aria-label="動画を再生">
+              <span class="c-circle__bg"></span><span class="c-circle__icon !w-[36%]"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>
+            </button>
           </div>
           <div class="mcard__box js-reveal">
             <p class="c-label c-label--plain">Concept Movie</p>
             <h2 class="pt-[1.4rem] pc:pt-[2rem] font-bold text-[2.2rem] pc:text-[3rem] leading-[1.4] tracking-[.02em]">PREVIOのコンセプト。</h2>
           </div>
-          <button type="button" class="mcard__play js-hover c-circle c-circle--m" aria-label="動画を再生">
-            <span class="c-circle__bg"></span><span class="c-circle__icon !w-[36%]"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>
-          </button>
         </div>
       </div>
     </section>

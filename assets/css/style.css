@@ -431,10 +431,13 @@ html.show-fixed-header .fixed-header { transform: translateY(0); opacity: 1; tra
 /* =========================================================
    Concept movie (ANA career / environment card)
    ========================================================= */
-.mcard { position: relative; display: flex; align-items: flex-end; height: 44rem; padding-left: 1.6rem; padding-right: 1.6rem; padding-bottom: 1.6rem; }
+/* 動画は 16:9（1920×1080）。見切れないよう動画エリアは常に 16:9 を保つ */
+/* SP：動画エリア（16:9）の下に白ボックスを配置 */
+.mcard { position: relative; }
+@media (min-width: 800px) { .mcard { display: flex; align-items: center; justify-content: flex-end; aspect-ratio: 16 / 9; padding-right: 5.6rem; } }
+.mcard__thumb { position: relative; aspect-ratio: 16 / 9; }
 /* ANA の偶数カード：白ボックスを右寄せ、背後の枠は左下にはみ出す */
-@media (min-width: 800px) { .mcard { align-items: center; justify-content: flex-end; height: 52rem; padding-left: 0; padding-right: 5.6rem; padding-bottom: 0; } }
-.mcard__thumb { position: absolute; inset: 0; }
+@media (min-width: 800px) { .mcard__thumb { position: absolute; inset: 0; aspect-ratio: auto; } }
 .mcard__thumb::before {
   content: "";
   position: absolute;
@@ -451,32 +454,27 @@ html.show-fixed-header .fixed-header { transform: translateY(0); opacity: 1; tra
 }
 .mcard__media { position: absolute; inset: 0; border-radius: 1.6rem; overflow: hidden; background: var(--dummy); }
 @media (min-width: 800px) { .mcard__media { border-radius: 3.2rem; } }
-.mcard__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+.mcard__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; opacity: 0; transition: opacity .5s ease; }
 .mcard.is-playing .mcard__media video { opacity: 1; }
-.mcard__media img { object-position: 20% 50%; }
-@media (min-width: 800px) { .mcard__media img { object-position: 50% 50%; } }
 .mcard__box {
   position: relative;
   max-width: 47.2rem;
-  padding-top: 3.2rem;
-  padding-left: 2.4rem;
-  padding-right: 2.4rem;
-  padding-bottom: 3.2rem;
+  padding-top: 4rem;
   border-radius: 1.6rem;
   background: #fff;
   transition: opacity .5s ease, visibility .5s;
 }
 @media (min-width: 800px) { .mcard__box { padding: 5.6rem; } }
-.mcard.is-playing .mcard__box,
+@media (min-width: 800px) { .mcard.is-playing .mcard__box { opacity: 0; visibility: hidden; } }
 .mcard.is-playing .mcard__play { opacity: 0; visibility: hidden; }
 .mcard__play {
   position: absolute;
-  top: 20%;
-  left: 80%;
+  top: 50%;
+  left: 50%;
   translate: -50% -50%;
   transition: opacity .5s ease, visibility .5s;
 }
-@media (min-width: 800px) { .mcard__play { top: 50%; left: 47%; } }
+@media (min-width: 800px) { .mcard__play { left: 47%; } }
 
 /* =========================================================
    Trust (ANA our business)
