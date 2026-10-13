@@ -65,21 +65,11 @@
   const inHeader = document.querySelector('.in-header');
 
   function playOpening() {
-    const opened = sessionStorage.getItem('previo-opened');
     gsap.set(kvEnChars, { y: 200 });
     gsap.set(kvEnChars, { opacity: 0 });
     gsap.set(kvCatchChars, { opacity: 0 });
     document.documentElement.classList.remove('is-loading');
 
-    if (opened) {
-      document.documentElement.classList.add('is-opened');
-      gsap.fromTo(kvCatchChars, { y: 20 }, { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out', stagger: 0.005, delay: 0.1 });
-      gsap.to(kvEnChars, { y: 0, duration: 0.6, ease: 'back.out(2)', stagger: 0.04, delay: 0.2 });
-      gsap.to(kvEnChars, { opacity: 1, duration: 0.3, ease: 'expo.out', stagger: 0.04, delay: 0.2 });
-      return;
-    }
-
-    sessionStorage.setItem('previo-opened', '1');
     lenis.stop();
     gsap.set(inHeader, { opacity: 0 });
     inHeader.style.visibility = 'visible';
@@ -165,9 +155,10 @@
 
   /* ---------- Why PREVIO アコーディオン（Human Eyes: PC mouseenter / SP click） ---------- */
   const whyList = document.querySelector('.js-why');
-  const whyItems = [...whyList.children];
+  const whyItems = whyList ? [...whyList.children] : [];
   let whyActive = 0;
   function layoutWhy() {
+    if (!whyList) return;
     const overlap = rem(4);
     const headH = whyItems[0].querySelector('.why-item__head').offsetHeight;
     const step = headH - rem(1);
@@ -189,6 +180,16 @@
     const head = item.querySelector('.why-item__head');
     item.addEventListener('mouseenter', () => { if (isPC() && whyActive !== i) { whyActive = i; layoutWhy(); } });
     head.addEventListener('click', () => { whyActive = i; layoutWhy(); });
+  });
+
+  /* ---------- Why PREVIO 横アコーディオン（index-new：Human Eyes の開閉を横方向に） ---------- */
+  document.querySelectorAll('.js-why2').forEach((list) => {
+    const items = [...list.children];
+    const setActive = (i) => items.forEach((item, n) => item.classList.toggle('is-active', n === i));
+    items.forEach((item, i) => {
+      item.addEventListener('mouseenter', () => { if (isPC()) setActive(i); });
+      item.querySelector('.why2-item__head').addEventListener('click', () => setActive(i));
+    });
   });
 
   /* ---------- The Problem（Human Eyes SMILE the NEXT） ---------- */
@@ -226,6 +227,7 @@
   const cardsList = document.querySelector('.js-cards-list');
   const cardState = { target: 0, cur: 0 };
   function layoutCards() {
+    if (!cards) return;
     if (isPC()) {
       cards.style.setProperty('--height', 450 * cardsList.children.length + 'px');
       cardsSticky.style.setProperty('--top', (window.innerHeight - cardsSticky.offsetHeight) / 2 + 'px');
@@ -234,16 +236,18 @@
       cardsSticky.style.setProperty('--top', '0px');
     }
   }
-  ScrollTrigger.create({
-    trigger: cards,
-    start: 'top 98%',
-    end: 'bottom 95%',
-    onUpdate: (s) => { cardState.target = s.progress; },
-  });
-  gsap.ticker.add(() => {
-    cardState.cur += (cardState.target - cardState.cur) * 0.1;
-    cardsList.style.setProperty('--ratio', cardState.cur.toFixed(4));
-  });
+  if (cards) {
+    ScrollTrigger.create({
+      trigger: cards,
+      start: 'top 98%',
+      end: 'bottom 95%',
+      onUpdate: (s) => { cardState.target = s.progress; },
+    });
+    gsap.ticker.add(() => {
+      cardState.cur += (cardState.target - cardState.cur) * 0.1;
+      cardsList.style.setProperty('--ratio', cardState.cur.toFixed(4));
+    });
+  }
 
   /* ---------- Concept Movie ---------- */
   const movie = document.querySelector('.js-movie');

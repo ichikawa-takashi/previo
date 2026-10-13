@@ -682,3 +682,105 @@ html.show-fixed-header .fixed-header { transform: translateY(0); opacity: 1; tra
 .js-reveal > * { opacity: 0; }
 .no-js .js-reveal > * { opacity: 1; }
 .c-ch { display: inline-block; will-change: transform; }
+
+/* =========================================================
+   index-new：Why PREVIO 横アコーディオン
+   Human Eyes の service（角丸 3.2rem・重なり -4rem・expo.out 1s・開いた面は青）を横方向に
+   ========================================================= */
+.why2 { position: relative; }
+.why2-item {
+  position: relative;
+  margin-top: -2rem;
+  border-radius: 2rem 2rem 0 0;
+  background: var(--color-white);
+  box-shadow: 0 -1px 0 var(--color-line);
+  color: var(--color-blue-700);
+  transition: background-color .15s, color .15s;
+}
+.why2-item:first-child { margin-top: 0; }
+.why2-item.is-active { background: var(--color-blue-700); color: #fff; box-shadow: none; }
+.why2-item__head {
+  display: flex;
+  align-items: center;
+  column-gap: 1.6rem;
+  padding: 2rem 2rem 3.6rem;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1.4;
+}
+.why2-item__icon { width: 4.4rem; height: 4.4rem; flex-shrink: 0; color: var(--color-mint); }
+.why2-item.is-active .why2-item__icon { color: var(--color-mint-light); }
+.why2-item__num { margin-right: .8rem; font-family: "Outfit", sans-serif; font-weight: 600; color: var(--color-mint); }
+.why2-item.is-active .why2-item__num { color: var(--color-mint-light); }
+.why2-item__body { display: none; padding: 0 2rem 5.6rem; }
+.why2-item.is-active .why2-item__body { display: block; }
+.why2-item__photo { width: 100%; height: 20rem; border-radius: 1.6rem; overflow: hidden; }
+.why2-item__text { padding-top: 2rem; font-size: 1.4rem; line-height: 1.75; }
+
+@media (min-width: 800px) {
+  .why2 { display: flex; height: 58rem; border-radius: 3.2rem; overflow: clip; }
+  .why2-item {
+    flex: 0 0 28rem;
+    margin-top: 0;
+    margin-left: -4rem;
+    border-radius: 3.2rem 0 0 3.2rem;
+    box-shadow: -1px 0 0 var(--color-line);
+    overflow: hidden;
+    transition: flex-basis 1s var(--ease-expo), background-color .15s, color .15s;
+  }
+  .why2-item:first-child { margin-left: 0; }
+  /* 閉じた2枚（28rem）と重なり（4rem×2）を引いた残りを開いた面に */
+  .why2-item.is-active { flex-basis: calc(100% - 48rem); }
+  .why2-item__head {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 2rem;
+    width: 14rem;
+    padding: 4.4rem 0 0 7.6rem;
+    box-sizing: content-box;
+    font-size: 2.2rem;
+  }
+  .why2-item:first-child .why2-item__head { padding-left: 4.4rem; }
+  .why2-item.is-active .why2-item__head { width: 40rem; }
+  .why2-item__icon { width: 5.8rem; height: 5.8rem; }
+  .why2-item__num { display: block; margin-right: 0; padding-bottom: .8rem; }
+  .why2-item__body {
+    display: flex;
+    column-gap: 4rem;
+    position: absolute;
+    left: 7.6rem;
+    bottom: 4.4rem;
+    width: 76rem;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s ease, visibility .4s;
+  }
+  .why2-item:first-child .why2-item__body { left: 4.4rem; }
+  .why2-item.is-active .why2-item__body { display: flex; opacity: 1; visibility: visible; transition-delay: .3s; }
+  .why2-item__photo { width: 32.3rem; height: 20.9rem; flex-shrink: 0; border-radius: 2.4rem; }
+  .why2-item__text { padding-top: 0; }
+}
+
+/* =========================================================
+   index-new：How it works 階段状に並ぶカード
+   カード自体は Human Eyes member's voice のまま。横スクロールをやめ、段差で順番を表す
+   ========================================================= */
+.how2__list { display: flex; overflow-x: auto; scrollbar-width: none; padding-left: 2rem; padding-right: 2rem; }
+.how2__list::-webkit-scrollbar { display: none; }
+@media (min-width: 800px) {
+  .how2__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2.4rem;
+    align-items: start;
+    width: 128rem;
+    margin: 0 auto;
+    padding: 0;
+    overflow: visible;
+  }
+  .how2__list .card { width: auto; margin-right: 0; }
+  .how2__list .card:nth-child(2) { margin-top: 8rem; }
+  .how2__list .card:nth-child(3) { margin-top: 16rem; }
+}
